@@ -1,5 +1,8 @@
 # frog`ui`
 
+## Wednesday, May 2, 2018 Notice
+THIS IS UNDER DEVELOPMENT AND SHOULD BE READY WITHIN A DAY OR TWO. THE NUGET PACKAGE IS NOT MUCH USE WITHOUT INSTRUCTIONS.
+
 ## Introduction
 **Frogui** is an proof-of-concept framework that allows developers familiar with C# and Visual Studio to build native client *web apps* using their existing skills, with no need to learn or use JavaScript or other web technologies. At the moment, it's very minimal, allowing the creation of lightweight [Console applications](https://docs.microsoft.com/en-us/dotnet/standard/building-console-apps).
 
@@ -17,12 +20,14 @@ WebAssembly is already being exploited by [C++](http://webassembly.org/docs/c-an
 
 Fortunately, Microsoft's commitment to allowing C# and .NET to run natively in the browser is serious. Consider, [Blazor](https://github.com/aspnet/Blazor), an "*experimental .NET web framework using C#/Razor and HTML that runs in the browser via WebAssembly*." Don't be thrown by the "Razor" reference; Blazor *is not* ASP.NET or server-side, it uses the Razor parser to do for code that runs in the client what ASP.NET does to code on the server.
 
+Less well known, but worth mentioning is the recently created open source [Ooui](https://github.com/praeclarum/Ooui) project by Frank Krueger. Ooui and Frank's input was instrumental in putting together Frogui, though Frogui does not use Ooui since the goals differ.
+
 ## Using Frogui
 Frogui is built on top of WebAssembly and mono-wasm, though besides adding the nuget package, these do not need to be added since WebAssembly is built into the browser and the mono-wasm bits are including in the package.
 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-^^^^^
+~~~~continue here
 
 What makes this particularly exciting is the code runs *natively* in the browser, all with the nearly the ease of the "F5" experience.
 
