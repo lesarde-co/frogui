@@ -19,3 +19,19 @@ Fortunately, Microsoft's commitment to allowing C# and .NET to run natively in t
 
 ## Using Frogui
 Frogui is built on top of WebAssembly and mono-wasm, though besides adding the nuget package, these do not need to be added since WebAssembly is built into the browser and the mono-wasm bits are including in the package.
+
+
+
+^^^^^
+
+What makes this particularly exciting is the code runs *natively* in the browser, all with the nearly the ease of the "F5" experience.
+
+Given that there are already a variety of ways to get C#
+ which is already widely supported in desktop and mobile browsers (save Internet Explorer)
+
+ - List item
+
+ , and Microsoft's newfound commitment to see C# and .NET Standard run everywhere
+
+ that is already available 
+ The goal is to maintain the "F5"
