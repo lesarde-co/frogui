@@ -1,8 +1,7 @@
-# frog`ui`
-
 ## Thursday, May 3, 2018 Update
 Instructions on website should be complete by tomorrow.
 
+# frog`ui`
 **Frogui** is a proof-of-concept framework that allows developers familiar with C# and Visual Studio to build native client *web apps* using their existing skills, with no need to learn or use JavaScript or other web technologies. Check out our [website](https://lesarde.com/frogui) for an overview and user's guide.
 
 ## Introduction
