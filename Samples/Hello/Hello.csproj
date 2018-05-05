@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.0.298" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.0.303" />
   </ItemGroup>
 
 </Project>

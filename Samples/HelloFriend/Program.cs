@@ -19,9 +19,14 @@ namespace HelloFriend
 			MainAsync(args);
 		}
 
-		// This is the body of the Main method, made public and async so it can be called by a Windows Console app for debugging purposes
+		// This is the body of the Main method, made async for good UI
+		// performance and public for debugging purposes
 		public static async void MainAsync(string[] args)
 		{
+			Console.ForegroundColor = System.ConsoleColor.Green;
+			Console.BackgroundColor = System.ConsoleColor.Black;
+			Console.Clear();
+
 			// Prompt user for name
 			Console.WriteLine("What is your name?");
 
