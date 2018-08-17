@@ -1,15 +1,15 @@
 ﻿using Lesarde.Frogui;
-using Lesarde.Frogui.Media;
-using System.Threading.Tasks;
 
 namespace HelloWorld
 {
     public partial class App : SinglePageApplication
     {
+		/// <summary>
+		/// This method is used to define the type that will be used as the root
+		/// element of the application, which is <see cref="Greeting"/>.
+		/// </summary>
 		public void InitializeComponent()
 		{
-			System.Console.WriteLine("InitializeComponent");
-
 			this.StartupType = typeof(Greeting);
 		}
 	}

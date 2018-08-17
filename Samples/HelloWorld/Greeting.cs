@@ -4,17 +4,20 @@ using Lesarde.Frogui.Media;
 
 namespace HelloWorld
 {
-    public partial class Greeting : TextBlock
+	/***************************************************************************************************
+		Greeting class
+	***************************************************************************************************/
+	/// <summary>
+	/// This class is a <see cref="TextBlock"/> that displays "Hello, World!". Note that this approach
+	/// is contrived for demonstration purposes.
+	/// Note this is a partial class.
+	/// </summary>
+	public partial class Greeting : TextBlock
     {
 		public Greeting()
 		{
-			System.Console.WriteLine("a-Greeting()");
-
+			// Allow the design.cs file to initialize
 			InitializeComponent();
-
-			//System.Console.WriteLine("b-Greeting()");
-
-			//System.Console.WriteLine("text prop = " + this.Text);
 		}
 	}
 }

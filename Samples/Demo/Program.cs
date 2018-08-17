@@ -1,8 +1,4 @@
-﻿/***************************************************************************************************
-	Demonstrates...
-***************************************************************************************************/
-
-using System;
+﻿using System;
 
 namespace Demo
 {
@@ -16,19 +12,9 @@ namespace Demo
 	{
 		static void Main(string[] args)
 		{
-			try
-			{
-				// Create and run the app
-				var app = new App();
-				app.Run();
-			}
-			// TODO:Is not catching exceptions here.
-			catch (Exception x)
-			{
-				App.Current.Alert(x.ToString());
-			}
+			// Create and run the app
+			var app = new App();
+			app.Run();
 		}
-	
-
 	}
 }

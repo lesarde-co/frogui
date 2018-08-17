@@ -4,6 +4,9 @@
 
 ****************************************************************************************************
 
+	Console
+		HelloFriend project
+
 Recommended order for learning:
 
 	1 - Hello project

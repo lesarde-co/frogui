@@ -9,6 +9,12 @@ using Lesarde.Frogui.Shapes;
 
 namespace Demo
 {
+	/***************************************************************************************************
+		Common class
+	***************************************************************************************************/
+	/// <summary>
+	/// Used to store items that are common for the demos.
+	/// </summary>
 	public static class Common
 	{
 		// Lorem Ipsum
@@ -17,6 +23,8 @@ namespace Demo
 		public static readonly Thickness Margin = new Thickness(new Length(5, Unit.Px));
 
 		public static readonly BitmapImage lesardeLogoImage = new BitmapImage(new System.Uri("Resources/Lesarde-64.png", UriKind.Relative));
+
+		public static readonly FontFamily Helvetica = new FontFamily("Helvetica");
 
 		public static readonly string[] StringMix =
 		{
@@ -36,7 +44,7 @@ namespace Demo
 		public static readonly FontFamily[] FontFamilyMix =
 		{
 			new FontFamily("Times"),
-			new FontFamily("Helvetica"),
+			Helvetica,
 			new FontFamily("Impact")
 		};
 
@@ -64,36 +72,36 @@ namespace Demo
 		};
 
 		// Solid Color Brushes
-		public static readonly HashSet<SolidColorBrush> SolidColorBrushes = new HashSet<SolidColorBrush>()
+		public static readonly SolidColorBrush[] SolidColorBrushes =
 		{
-			{ new SolidColorBrush(Colors.Aqua) },
-			{ new SolidColorBrush(Colors.Azure) },
-			{ new SolidColorBrush(Colors.Black) },
-			{ new SolidColorBrush(Colors.Blue) },
-			{ new SolidColorBrush(Colors.Cyan) },
-			{ new SolidColorBrush(Colors.DarkBlue) },
-			{ new SolidColorBrush(Colors.DarkGray) },
-			{ new SolidColorBrush(Colors.DarkMagenta) },
-			{ new SolidColorBrush(Colors.DarkRed) },
-			{ new SolidColorBrush(Colors.DarkSeaGreen) },
-			{ new SolidColorBrush(Colors.DarkSlateBlue) },
-			{ new SolidColorBrush(Colors.DarkViolet) },
-			{ new SolidColorBrush(Colors.DimGray) },
-			{ new SolidColorBrush(Colors.Gray) },
-			{ new SolidColorBrush(Colors.Green) },
-			{ new SolidColorBrush(Colors.Indigo) },
-			{ new SolidColorBrush(Colors.LightGray) },
-			{ new SolidColorBrush(Colors.LightBlue) },
-			{ new SolidColorBrush(Colors.Lime) },
-			{ new SolidColorBrush(Colors.Magenta) },
-			{ new SolidColorBrush(Colors.MidnightBlue) },
-			{ new SolidColorBrush(Colors.Orange) },
-			{ new SolidColorBrush(Colors.Red) },
-			{ new SolidColorBrush(Colors.SlateBlue) },
-			{ new SolidColorBrush(Colors.Transparent) },
-			{ new SolidColorBrush(Colors.Violet) },
-			{ new SolidColorBrush(Colors.White) },
-			{ new SolidColorBrush(Colors.Yellow) }
+			new SolidColorBrush(Colors.Aqua),
+			new SolidColorBrush(Colors.Azure),
+			new SolidColorBrush(Colors.Black),
+			new SolidColorBrush(Colors.Blue),
+			new SolidColorBrush(Colors.Cyan),
+			new SolidColorBrush(Colors.DarkBlue),
+			new SolidColorBrush(Colors.DarkGray),
+			new SolidColorBrush(Colors.DarkMagenta),
+			new SolidColorBrush(Colors.DarkRed),
+			new SolidColorBrush(Colors.DarkSeaGreen),
+			new SolidColorBrush(Colors.DarkSlateBlue),
+			new SolidColorBrush(Colors.DarkViolet),
+			new SolidColorBrush(Colors.DimGray),
+			new SolidColorBrush(Colors.Gray),
+			new SolidColorBrush(Colors.Green),
+			new SolidColorBrush(Colors.Indigo),
+			new SolidColorBrush(Colors.LightGray),
+			new SolidColorBrush(Colors.LightBlue),
+			new SolidColorBrush(Colors.Lime),
+			new SolidColorBrush(Colors.Magenta),
+			new SolidColorBrush(Colors.MidnightBlue),
+			new SolidColorBrush(Colors.Orange),
+			new SolidColorBrush(Colors.Red),
+			new SolidColorBrush(Colors.SlateBlue),
+			new SolidColorBrush(Colors.Transparent),
+			new SolidColorBrush(Colors.Violet),
+			new SolidColorBrush(Colors.White),
+			new SolidColorBrush(Colors.Yellow)
 		};
 
 
@@ -174,6 +182,7 @@ namespace Demo
 			GetSolidColorBrush(Colors.Lime),
 			GetSolidColorBrush(Colors.DarkMagenta),
 			GetSolidColorBrush(Colors.White),
+			GetSolidColorBrush(Colors.Transparent),
 			LinearGradientBrushes[0],
 			LinearGradientBrushes[1],
 			RadialGradientBrushes[0],
@@ -187,6 +196,14 @@ namespace Demo
 			new Tuple<Length, Length>(new Length(240, Unit.Px), new Length(160, Unit.Px)),
 			new Tuple<Length, Length>(new Length(480, Unit.Px), new Length(320, Unit.Px))
 		};
+
+		public static readonly Tuple<Length, Length>[] SizesMix2 =
+		{
+			new Tuple<Length, Length>(new Length(500, Unit.Px), new Length(300, Unit.Px)),
+			new Tuple<Length, Length>(new Length(700, Unit.Px), new Length(400, Unit.Px)),
+			new Tuple<Length, Length>(new Length(200, Unit.Px), new Length(300, Unit.Px))
+		};
+
 
 		public static readonly Thickness[] ThicknessMix =
 		{
@@ -222,6 +239,7 @@ namespace Demo
 			new CornerRadius(new Length(5, Unit.Px), new Length(110, Unit.Px), new Length(0, Unit.Px), new Length(50, Unit.Px))
 		};
 
+
 		public static Grid PrepareDemoGrid(Grid e_grid, int totCols, int totRows, Brush bkgdBrush, Brush cellBrush)
 		{
 			var gap = new Length(10.0, Unit.Px);
@@ -232,10 +250,10 @@ namespace Demo
 			e_grid.Background = bkgdBrush;			
 
 			for (int col = 0; col < totCols; ++col)
-				e_grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+				e_grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(new Length(1, Unit.Fr)) });
 
 			for (int row = 0; row < totRows; ++row)
-				e_grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+				e_grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(new Length(1, Unit.Fr)) });
 
 			for (int col = 0; col < totCols; ++col)
 				for (int row = 0; row < totRows; ++row)

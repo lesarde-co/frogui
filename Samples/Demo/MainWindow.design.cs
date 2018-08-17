@@ -19,6 +19,9 @@ namespace Demo
 		Flex
 			e_buttons;
 
+		ScrollViewer
+			e_scollViewer;
+
 		/*******************************************************************************
 			InitializeComponent()
 		*******************************************************************************/
@@ -28,8 +31,8 @@ namespace Demo
 			// Create and add a grid as this window's child
 			e_grid = new Grid();
 			e_grid.ColumnDefinitions
-				.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) })
-				.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+				.Add(new ColumnDefinition() { Width = GridLength.Auto })
+				.Add(new ColumnDefinition() { Width = new GridLength(new Length(1, Unit.Fr)) });
 
 			Child = e_grid;
 
@@ -42,7 +45,16 @@ namespace Demo
 				Width = new Length(160, Unit.Px)
 			};
 			e_grid.Children.Add(e_buttons);
-		
+
+			e_scollViewer = new ScrollViewer()
+			{
+				HorizontalAlignment = HorizontalAlignment.Stretch,
+				VerticalAlignment = VerticalAlignment.Stretch,
+				HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
+				VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+			};
+
+			e_grid.Children.Add(e_scollViewer, new Grid.Anchor(1, 0));
 		}
 	}
 }

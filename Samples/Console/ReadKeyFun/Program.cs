@@ -8,8 +8,18 @@
 
 namespace ReadKeyFun
 {
+	/***************************************************************************************************
+		Program class
+	***************************************************************************************************/
+	/// <summary>
+	/// Demonstrates how to read key entry into a console.
+	/// </summary>
 	class Program
 	{
+		/// <summary>
+		/// This is the app entry point. Console processing should be done in
+		/// <see cref="App.MainAsync"/>.
+		/// </summary>
 		static void Main(string[] args)
 		{
 			// Create and run the app

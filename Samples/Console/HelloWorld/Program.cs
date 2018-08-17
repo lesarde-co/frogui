@@ -1,16 +1,17 @@
-﻿/*
- * Demonstrates the classic "Hello, World!" app. It:
- *		- is a C# .NET Standard dll project -- the only option at the moment for frogui.
- *		- has an <OutputType> property added to the project file so the "Main" method entry point can be found; dll's do not have entry points by default.
- *		- has the Lesarde.Frogui.Wasm NuGet package added.
- *		- may be run as-is within a browser.
- *		- is not debuggable in its current form. See the HelloDebugger project to learn more.
- */
-
-namespace HelloWorld
+﻿namespace HelloWorld
 {
+	/***************************************************************************************************
+		Program class
+	***************************************************************************************************/
+	/// <summary>
+	/// Demonstrates the classic Hello World app in a console.
+	/// </summary>
 	class Program
 	{
+		/// <summary>
+		/// This is the app entry point. Console processing should be done in
+		/// <see cref="App.MainAsync"/>.
+		/// </summary>
 		static void Main(string[] args)
 		{
 			// Create and run the app

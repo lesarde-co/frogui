@@ -3,10 +3,19 @@ using System.Threading.Tasks;
 
 namespace ReadKeyFun
 {
-    public class App : ConsoleApplication
+	/***************************************************************************************************
+		App class
+	***************************************************************************************************/
+	/// <summary>
+	/// Used for this application's <see cref="Application"/> singleton object, deriving from
+	/// <see cref="ConsoleApplication"/> which all console apps must do.
+	/// </summary>
+	public class App : ConsoleApplication
     {
-		// This is the main method associated with this console app. It is equivalent
-		// to the Main method in a traditional .NET console application.
+		/// <summary>
+		/// This is where console interaction begins, much like the static main() 
+		/// method in a traditional console app.
+		/// </summary>
 		public async override Task MainAsync()
 		{
 			var sysForeground = System.ConsoleColor.White;

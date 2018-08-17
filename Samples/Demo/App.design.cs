@@ -11,7 +11,7 @@ namespace Demo
     {
 		public void InitializeComponent()
 		{
-			// Indicate that the MainWindow class is this app's startup element
+			// Indicate that the MainWindow class is this app's root element
 			this.StartupType = typeof(MainWindow);
 		}
 	}

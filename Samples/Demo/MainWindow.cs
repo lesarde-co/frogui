@@ -25,12 +25,18 @@ namespace Demo
 		/// </summary>
 		enum DemoId
 		{
+			None,
 			LayoutAlignment,
 			TextBlock,
 			Image,
 			Rectangle,
 			Ellipse,
-			Border
+			Border,
+			ScrollViewer,
+			TextBox,
+			Flex,
+			Calculator,
+			TipCalculator
 		}
 
 		/***********************************************************
@@ -43,14 +49,25 @@ namespace Demo
 		readonly Length NormalButtonCornerRadius = new Length(5, Unit.Px);
 
 		/***********************************************************
+			Me property
+		***********************************************************/
+
+		public static MainWindow Me { get; private set; }
+
+		/***********************************************************
 			variables
 		***********************************************************/
 
 		/// <summary>
-		/// Keeps track of the current demo.
+		/// Keeps track of the current demo id.
+		/// </summary>
+		DemoId currentDemoId;
+
+		/// <summary>
+		/// Keeps track of the current demo object.
 		/// </summary>
 		UIElement currentDemo;
-
+		
 		/*******************************************************************************
 			$
 		*******************************************************************************/
@@ -59,6 +76,8 @@ namespace Demo
 		/// </summary>
 		public MainWindow()
 		{
+			Me = this;
+
 			InitializeComponent();
 
 			// Set the background of this window
@@ -94,7 +113,7 @@ namespace Demo
 			};
 
 			// Handle the home button click event.
-			e_homeButton.Click += (sender, e) => ShowDemo(null);
+			e_homeButton.Click += (sender, e) => ShowDemo(DemoId.None, null);
 
 			// Add the home button to the button list
 			e_buttons.Children.Add(e_homeButton);
@@ -127,7 +146,8 @@ namespace Demo
 
 			// Add all the demo buttons to the button list
 			foreach (DemoId cur in Enum.GetValues(typeof(DemoId)))
-				AddDemoButton(cur, buttonBackground);
+				if (DemoId.None != cur)
+					AddDemoButton(cur, buttonBackground);
 		}
 
 		/*******************************************************************************
@@ -177,26 +197,44 @@ namespace Demo
 			// Determine which demo was requested
 			var id = (DemoId)((Button)sender).Tag;
 
+			if (id == currentDemoId)
+				return;
+
 			// Run the requested demo
 			switch (id)
 			{
 				case DemoId.LayoutAlignment:
-					ShowDemo(new LayoutAlignment_Demo());
+					ShowDemo(id, new LayoutAlignment_Demo());
 					break;
 				case DemoId.TextBlock:
-					ShowDemo(new TextBlock_Demo());
+					ShowDemo(id, new TextBlock_Demo());
 					break;
 				case DemoId.Rectangle:
-					ShowDemo(new Rectangle_Demo());
+					ShowDemo(id, new Rectangle_Demo());
 					break;
 				case DemoId.Ellipse:
-					ShowDemo(new Ellipse_Demo());
+					ShowDemo(id, new Ellipse_Demo());
 					break;
 				case DemoId.Border:
-					ShowDemo(new Border_Demo());
+					ShowDemo(id, new Border_Demo());
 					break;
 				case DemoId.Image:
-					ShowDemo(new Image_Demo());
+					ShowDemo(id, new Image_Demo());
+					break;
+				case DemoId.ScrollViewer:
+					ShowDemo(id, new ScrollViewer_Demo());
+					break;
+				case DemoId.TextBox:
+					ShowDemo(id, new TextBox_Demo());
+					break;
+				case DemoId.Flex:
+					ShowDemo(id, new Flex_Demo());
+					break;
+				case DemoId.Calculator:
+					ShowDemo(id, new Calculator.Calculator_Demo());
+					break;
+				case DemoId.TipCalculator:
+					ShowDemo(id, new TipCalculator.TipCalculator_Demo());
 					break;
 			}
 		}
@@ -209,17 +247,15 @@ namespace Demo
 		/// app returns to the home state.
 		/// </summary>
 		/// <param name="newDemo"></param>
-		void ShowDemo(UIElement newDemo)
+		void ShowDemo(DemoId demoId, UIElement newDemo)
 		{
-			if (currentDemo == newDemo)
-				return;
-
 			if (null != currentDemo)
-				e_grid.Children.Remove(currentDemo);
+				e_scollViewer.Child = null;
 
 			if (null != newDemo)
-				e_grid.Children.Add(newDemo, new Grid.Anchor(1, 0));
+				e_scollViewer.Child = newDemo;
 
+			currentDemoId = demoId;
 			currentDemo = newDemo;
 		}
 

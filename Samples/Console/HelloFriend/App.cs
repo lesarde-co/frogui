@@ -3,33 +3,42 @@ using System.Threading.Tasks;
 
 namespace HelloFriend
 {
-    public class App : ConsoleApplication
+	/***************************************************************************************************
+		App class
+	***************************************************************************************************/
+	/// <summary>
+	/// Used for this application's <see cref="Application"/> singleton object, deriving from
+	/// <see cref="ConsoleApplication"/> which all console apps must do.
+	/// </summary>
+	public class App : ConsoleApplication
     {
-		// This is the main method associated with this console app. It is equivalent
-		// to the Main method in a traditional .NET console application.
+		/// <summary>
+		/// This is where console interaction begins, much like the static main() 
+		/// method in a traditional console app.
+		/// </summary>
 		public async override Task MainAsync()
 		{
-			var mainColor = System.ConsoleColor.Green;
+			var outputColor = System.ConsoleColor.Green;
 			var inputColor = System.ConsoleColor.Yellow;
 
 			Console.ForegroundColor = System.ConsoleColor.Green;
 			Console.BackgroundColor = System.ConsoleColor.Black;
 			Console.Clear();
 
-			Console.ForegroundColor = mainColor;
+			Console.ForegroundColor = outputColor;
 			Console.Write("Enter your name:");
 
 			Console.ForegroundColor = inputColor;
 			var name = await Console.ReadLineAsync();
 
-			Console.ForegroundColor = mainColor;
+			Console.ForegroundColor = outputColor;
 			Console.Write("Enter your age:");
 
 			Console.ForegroundColor = inputColor;
 			var age = await Console.ReadLineAsync();
 
-			Console.ForegroundColor = System.ConsoleColor.Green;
-			Console.WriteLine($"Hello, {name}! It's nice to meet you. {age} is a good age!");
+			Console.ForegroundColor = outputColor;
+			Console.WriteLine("Hello, " + name + "! It's nice to meet you. " + age + " is a good age!");
 		}
 
 	}

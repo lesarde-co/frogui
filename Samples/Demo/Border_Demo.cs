@@ -15,6 +15,8 @@ namespace Demo
 		{
 			InitializeComponent();
 
+			// TODO: Show background clip options
+
 			foreach (var size in Common.SizesMix)
 				foreach (var thickness in Common.ThicknessMix)
 					foreach (var cornerRadius in Common.CornerRadiusMix)
