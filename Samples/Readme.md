@@ -24,9 +24,14 @@ Main Frogui demonstration filled with examples of how to use:
 - commands
 - styles and themes
 - visual states
-- applications to create deliverables.
+- applications to create deliverables
 - XAML
 - Reactive Extensions (Rx) observables
+- dependency properties
+- device input
+- validation
+- data-binding
+- cascading asset sheets
 - *and more*
 
 ### Console folder
