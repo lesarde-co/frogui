@@ -22,7 +22,9 @@ namespace Demo
 
 		public static readonly Thickness Margin = new Thickness(new Length(5, Unit.Px));
 
-		public static readonly BitmapImage lesardeLogoImage = new BitmapImage(new System.Uri("Resources/Lesarde-64.png", UriKind.Relative));
+		public static readonly BitmapImage LesardeLogoImage = new BitmapImage(new System.Uri("Resources/Lesarde-64.png", UriKind.Relative));
+		public static readonly BitmapImage GmailIcon = new BitmapImage(new System.Uri("Resources/GmailIcon.png", UriKind.Relative));
+		public static readonly BitmapImage SunImage = new BitmapImage(new System.Uri("Resources/Sun.png", UriKind.Relative));
 
 		public static readonly FontFamily Helvetica = new FontFamily("Helvetica");
 
@@ -50,10 +52,10 @@ namespace Demo
 
 		public static readonly FontWeight[] FontWeightMix =
 		{
-			new FontWeight(FontWeightKind.Lighter),
-			new FontWeight(FontWeightKind.Normal),
-			new FontWeight(FontWeightKind.Bold),
-			new FontWeight(200)
+			FontWeight.FromKind(FontWeightKind.Lighter),
+			FontWeight.FromKind(FontWeightKind.Normal),
+			FontWeight.FromKind(FontWeightKind.Bold),
+			FontWeight.FromNumber(200)
 		};
 
 		public static readonly FontStyle[] FontStyleMix =
@@ -116,11 +118,11 @@ namespace Demo
 					.Add(new GradientStop(Colors.Yellow, new Length(100.0, Unit.Percent)))
 					),
 			new LinearGradientBrush(
+				new LinearGradientAngle(LinearGradientAngleKind.ToRight),
 				new GradientStopCollection()
 					.Add(new GradientStop(Colors.BlueViolet, new Length(0.0, Unit.Percent)))
 					.Add(new GradientStop(Colors.MidnightBlue, new Length(50.0, Unit.Percent)))
-					.Add(new GradientStop(Colors.DarkTurquoise, new Length(100.0, Unit.Percent))),
-					new LinearGradientAngle(LinearGradientAngleKind.ToRight)
+					.Add(new GradientStop(Colors.DarkTurquoise, new Length(100.0, Unit.Percent)))
 					)
 		};
 
@@ -250,10 +252,10 @@ namespace Demo
 			e_grid.Background = bkgdBrush;			
 
 			for (int col = 0; col < totCols; ++col)
-				e_grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(new Length(1, Unit.Fr)) });
+				e_grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(new Length(1, Unit.Star)) });
 
 			for (int row = 0; row < totRows; ++row)
-				e_grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(new Length(1, Unit.Fr)) });
+				e_grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(new Length(1, Unit.Star)) });
 
 			for (int col = 0; col < totCols; ++col)
 				for (int row = 0; row < totRows; ++row)

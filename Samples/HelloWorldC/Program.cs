@@ -1,22 +1,26 @@
-﻿namespace HelloWorldA
+﻿using System;
+
+namespace HelloWorldC
 {
 	/***************************************************************************************************
 		Program class
 	***************************************************************************************************/
 	/// <summary>
-	/// Demonstrates the classic Hello World app in a console.
+	/// Demonstrates the classic Hello World app.
 	/// </summary>
-	class Program
+	public class Program
 	{
 		/// <summary>
-		/// This is the app entry point. Console processing should be done in
-		/// <see cref="App.MainAsync"/>.
+		/// This is the app entry point.
 		/// </summary>
 		static void Main(string[] args)
 		{
-			// Create and run the app
+			// Create and run a new app object
 			var app = new App();
 			app.Run();
+
+			// Your code here, though generally app-level code should be added to the App class, which
+			// is the singleton that is created above.
 		}
 	}
 }

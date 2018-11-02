@@ -1,0 +1,76 @@
+﻿<Grid x:Class="Demo.Calculator.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="namespace:Demo.Calculator"
+		ColumnCount="4"
+		RowCount="8"
+		>
+
+	<Grid.AssetSheet>
+		<Constants>
+		</Constants>
+		<Styles>
+			<Style Name="MemButtonStyle" TargetType="Button"
+				Background="#1E1F23"
+				/>
+			<Style Name="FuncButtonStyle" TargetType="Button"
+				Background="#2D2E33"
+				/>
+			<Style Name="DigitButtonStyle" TargetType="Button"
+				Background="#3A3D44"
+				/>
+			<Style Name="EqualButtonStyle" TargetType="Button"
+				Background="#CD362D" 
+				/>
+		</Styles>
+	</Grid.AssetSheet>
+
+	<!-- Display -->
+	<Border Name="e_display" Anchor="0,4,0,2"
+		Background = "#2D3035"
+		BorderBrush = "local:MyAssets.Singleton.MyBorderBrush"
+		BorderThickness = "3px"
+		BorderPattern = "Solid"
+		Padding = "8px"
+		>
+		<TextBlock Name="e_text"
+			FontWeight = "local:MyAssets.Singleton.MyFontWeight"
+			FontFamily = "local:MyAssets.Singleton.MyFontFamily"
+			FontSize = "9vw"
+			HorizontalAlignment = "Right"
+			VerticalAlignment = "Center"
+			Text="{Binding DisplayText}"
+			/>
+	</Border>
+
+	<!-- Buttons -->
+
+	<local:PadButton Name="e_memClear" Command="local:ViewModel.Commands.MemClear" Style="MemButtonStyle" Text="mc" Anchor="0,2" />
+	<local:PadButton Name="e_memRecall" Command="local:ViewModel.Commands.MemRecall" Style="MemButtonStyle" Text="mr" Anchor="1,2" />
+	<local:PadButton Name="e_memAdd" Command="local:ViewModel.Commands.MemAdd" Style="MemButtonStyle" Text="m+" Anchor="2,2" />
+	<local:PadButton Name="e_memSubtract" Command="local:ViewModel.Commands.MemSubtract" Style="MemButtonStyle" Text="m-" Anchor="3,2" />
+
+	<local:PadButton Name="e_allClear" Command="local:ViewModel.Commands.AllClear" Style="FuncButtonStyle" Text="AC" Anchor="0,3" />
+	<local:PadButton Name="e_percent" Command="local:ViewModel.Commands.Percent" Style="FuncButtonStyle" Text="%" Anchor="1,3" />
+	<local:PadButton Name="e_divide" Command="local:ViewModel.Commands.Divide" Style="FuncButtonStyle" Text="÷" Anchor="2,3" />
+	<local:PadButton Name="e_multiple" Command="local:ViewModel.Commands.Multiply" Style="FuncButtonStyle" Text="×" Anchor="3,3" />
+
+	<local:PadButton Name="e_d7" Command="local:ViewModel.Commands.D7" Style="DigitButtonStyle" Text="7" Anchor="0,4" />
+	<local:PadButton Name="e_d8" Command="local:ViewModel.Commands.D8" Style="DigitButtonStyle" Text="8" Anchor="1,4" />
+	<local:PadButton Name="e_d9" Command="local:ViewModel.Commands.D9" Style="DigitButtonStyle" Text="9" Anchor="2,4" />
+	<local:PadButton Name="e_subtract" Command="local:ViewModel.Commands.Subtract" Style="FuncButtonStyle" Text="-" Anchor="3,4" />
+
+	<local:PadButton Name="e_d4" Command="local:ViewModel.Commands.D4" Style="DigitButtonStyle" Text="4" Anchor="0,5" />
+	<local:PadButton Name="e_d5" Command="local:ViewModel.Commands.D5" Style="DigitButtonStyle" Text="5" Anchor="1,5" />
+	<local:PadButton Name="e_d6" Command="local:ViewModel.Commands.D6" Style="DigitButtonStyle" Text="6" Anchor="2,5" />
+	<local:PadButton Name="e_add" Command="local:ViewModel.Commands.Add" Style="FuncButtonStyle" Text="+" Anchor="3,5" />
+
+	<local:PadButton Name="e_d1" Command="local:ViewModel.Commands.D1" Style="DigitButtonStyle" Text="1" Anchor="0,6" />
+	<local:PadButton Name="e_d2" Command="local:ViewModel.Commands.D2" Style="DigitButtonStyle" Text="2" Anchor="1,6" />
+	<local:PadButton Name="e_d3" Command="local:ViewModel.Commands.D3" Style="DigitButtonStyle" Text="3" Anchor="2,6" />
+	<local:PadButton Name="e_equal" Command="local:ViewModel.Commands.Equal" Style="EqualButtonStyle" Text="=" Anchor="3,1,6,2" />
+
+	<local:PadButton Name="e_d0" Command="local:ViewModel.Commands.D0" Style="DigitButtonStyle" Text="0" Anchor="0,7" />
+	<local:PadButton Name="e_decimal" Command="local:ViewModel.Commands.Decimal" Style="DigitButtonStyle" Text="." Anchor="1,7" />
+	<local:PadButton Name="e_negate" Command="local:ViewModel.Commands.Negate" Style="DigitButtonStyle" Text="±" Anchor="2,7" />
+
+</Grid>

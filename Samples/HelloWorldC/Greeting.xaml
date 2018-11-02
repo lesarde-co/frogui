@@ -1,0 +1,13 @@
+﻿<!--
+	Greeting.xaml
+	This is the declarative portion of the Greeting class. Notice the
+	TextBlock.Text property is bound to the view-model's Message property.
+ -->
+
+<TextBlock x:Class="HelloWorldC.Greeting"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	FontSize = "Large"
+	HorizontalAlignment = "Center"
+	VerticalAlignment = "Center"
+	Text ="{Binding Message}"
+	/>

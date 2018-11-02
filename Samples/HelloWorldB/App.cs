@@ -1,15 +1,14 @@
 ﻿using Lesarde.Frogui;
-using Lesarde.Frogui.Input;
 
-namespace Demo
+namespace HelloWorldB
 {
 	/***************************************************************************************************
-		App class (code-behind)
+		App class
 	***************************************************************************************************/
 	/// <summary>
-	/// The application object singleton. <see cref="App"/> inherits from
-	/// <see cref="SinglePageApplication"/>, which indicates that it is meant to be a Single Page GUI
-	/// Application (SPA).
+	/// Used for this application's <see cref="Application"/> singleton object, deriving from
+	/// <see cref="SinglePageApplication"/> which all single-page apps must do.
+	/// Note that this is a partial class.
 	/// </summary>
 	public partial class App : SinglePageApplication
 	{
@@ -23,7 +22,7 @@ namespace Demo
 		{
 			InitializeComponent();
 
-			// Add user code here
+			// Your code here
 		}
 	}
 }

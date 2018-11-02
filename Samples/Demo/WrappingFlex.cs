@@ -19,12 +19,12 @@ namespace Demo
 
 		protected int Current { get; private set; }
 
-		public WrappingFlex(int osSkip, int wasmSkip)
+		public WrappingFlex(int simulatorSkip, int wasmSkip)
 		{
 #if WASM
 			this.Skip = wasmSkip;
 #else
-			this.Skip = osSkip;
+			this.Skip = simulatorSkip;
 #endif
 			Wrapping = FlexWrapping.Wrap;
 		}

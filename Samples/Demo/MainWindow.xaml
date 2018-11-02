@@ -1,0 +1,35 @@
+﻿<Window x:Class="Demo.MainWindow"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="namespace:Demo"
+		Background="LinearGradientBrush(ToRightBottom, #000020 20%, RoyalBlue 100%)"
+		>
+	<Grid Name="e_grid" ColumnDefinitions="Auto,*" >
+
+		<!-- Menu Column -->
+		<Flex Name="e_buttons" Direction="Column" Wrapping="NoWrap" Background="#000033" Width="180px" Margin="5px">
+
+			<!-- Build Info -->
+			<TextBlock Name="e_buildType" HorizontalAlignment="Center" Foreground="SlateBlue" FontSize="Large"/>
+			<TextBlock HorizontalAlignment="Center" Foreground="DarkSlateBlue" FontSize="Small" Text="v0.2.0"/>
+
+			<!-- Home Buttom -->
+			<Button
+				Margin="5px"
+				BorderThickness="1.5px"
+				BorderBrush="DarkSlateBlue"
+				CornerRadius="5px"
+				Padding="4px,8px,4px,8px"
+				Background="LinearGradientBrush(ToBottom, #55000000 0%, #55FFFFFF 46%, #55FFFFFF 64%, #55000000 100%)"
+				Click="e_homeButton_Click"
+				>
+				<Image Source="local:Common.LesardeLogoImage" HorizontalAlignment = "Center" VerticalAlignment = "Center" Opacity="0.8"/>
+			</Button>
+
+		</Flex>
+
+		<!-- Demo Area -->
+		<ScrollViewer Name="e_scrollViewer" Anchor="1,0"  HorizontalAlignment = "Stretch" VerticalAlignment = "Stretch" HorizontalScrollBarVisibility = "Disabled" VerticalScrollBarVisibility = "Auto" />
+
+	</Grid>
+
+</Window>

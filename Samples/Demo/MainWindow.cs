@@ -1,7 +1,9 @@
 ﻿using Lesarde.Frogui;
-using Lesarde.Frogui.Controls;
-using Lesarde.Frogui.Media;
+using Lesarde.Frogui.Input;
 using System;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Text.RegularExpressions;
 
 namespace Demo
 {
@@ -18,56 +20,34 @@ namespace Demo
 	public partial class MainWindow : Window
     {
 		/***********************************************************
-			DemoId enum
-		***********************************************************/
-		/// <summary>
-		/// Contains an item for each demonstration in this app.
-		/// </summary>
-		enum DemoId
-		{
-			None,
-			LayoutAlignment,
-			TextBlock,
-			Image,
-			Rectangle,
-			Ellipse,
-			Border,
-			ScrollViewer,
-			TextBox,
-			Flex,
-			Calculator,
-			TipCalculator
-		}
-
-		/***********************************************************
-			read-only values
-		***********************************************************/
-
-		/// <summary>
-		/// Create a "normal" corner radius for buttons for reuse.
-		/// </summary>
-		readonly Length NormalButtonCornerRadius = new Length(5, Unit.Px);
-
-		/***********************************************************
 			Me property
 		***********************************************************/
 
 		public static MainWindow Me { get; private set; }
 
 		/***********************************************************
-			variables
+			properties
 		***********************************************************/
 
 		/// <summary>
-		/// Keeps track of the current demo id.
+		/// Keeps track of the current demo type.
 		/// </summary>
-		DemoId currentDemoId;
+		Type CurrentDemoType => null == CurrentDemo ? null : CurrentDemo.GetType();
 
 		/// <summary>
 		/// Keeps track of the current demo object.
 		/// </summary>
-		UIElement currentDemo;
-		
+		UIElement CurrentDemo { get; set; }
+
+		/***********************************************************
+			Commands class
+		***********************************************************/
+
+		public static class Commands
+		{
+			public static RoutedCommand<Type> RunDemo { get; } = new RoutedCommand<Type>();
+		}
+
 		/*******************************************************************************
 			$
 		*******************************************************************************/
@@ -80,184 +60,90 @@ namespace Demo
 
 			InitializeComponent();
 
-			// Set the background of this window
-			Background = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgb(0x00, 0x00, 0x20), new Length(20.0, Unit.Percent)))
-					.Add(new GradientStop(Colors.RoyalBlue, new Length(100.0, Unit.Percent))));
-			
-			// Create the home button
-			var e_homeButton = new Button()
-			{
-				Margin = new Thickness(new Length(5, Unit.Px)),
-				BorderThickness = new Thickness(new Length(1.5, Unit.Px)),
-				Background = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgba(0x00, 0x00, 0x00, 0.33), new Length(0.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0xff, 0xff, 0xff, 0.33), new Length(46.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0xff, 0xff, 0xff, 0.33), new Length(64.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0x00, 0x00, 0x00, 0.33), new Length(100.0, Unit.Percent))),
-					new LinearGradientAngle(LinearGradientAngleKind.ToBottom)
-					),
-				BorderBrush = Common.GetSolidColorBrush(Colors.DarkSlateBlue),
-				CornerRadius = new CornerRadius(NormalButtonCornerRadius),
-				Padding = new Thickness(new Length(4, Unit.Px), new Length(8, Unit.Px), new Length(4, Unit.Px), new Length(8, Unit.Px)),
-
-				Child = new Image()
+			CommandBindings.Add(Commands.RunDemo)
+				// .Throttle(new TimeSpan(1000)) // Slow down happy clicks. NOTE: For Frogui v 0.2.0, avoid concurrent Reactive Extension (Rx) methods for routed commands
+				.Where(e => e.Parameter != CurrentDemoType)  // Only allow a different demo request through
+				.Subscribe(e =>
 				{
-					Source = Common.lesardeLogoImage,
-					HorizontalAlignment = HorizontalAlignment.Center,
-					VerticalAlignment = VerticalAlignment.Center,
-					Opacity = 0.8
-				}
-			};
-
-			// Handle the home button click event.
-			e_homeButton.Click += (sender, e) => ShowDemo(DemoId.None, null);
-
-			// Add the home button to the button list
-			e_buttons.Children.Add(e_homeButton);
+					// If just a query then indicate the command can execute
+					if (e.IsQuery)
+						e.CanExecute = true;
+					// Execute the command
+					else
+					{
+						ShowDemo(e.Parameter);
+						e.Handled = true;
+					}
+				});
 
 #if WASM
-			var BuildName = "wasm";
+			var BuildName = "WebAssembly";
 #else
-			var BuildName = "os";
+			var BuildName = "Simulator";
 #endif
-			e_buttons.Children.Add(new TextBlock()
-			{
-				Text = BuildName,
-				HorizontalAlignment = HorizontalAlignment.Center,
-				Foreground = Common.GetSolidColorBrush(Colors.DarkSlateBlue),
-				FontSize = Common.FontSizeMix[0]
-			});
+
+			e_buildType.Text = BuildName;
 
 			Title = $"Frogui Demo ({BuildName})";
 
-
-			// Create the demo button background
-			var buttonBackground = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgb(0x3f, 0x92, 0xc6), new Length(0.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x25, 0x74, 0xa3), new Length(56.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x1d, 0x5f, 0x88), new Length(64.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x1d, 0x5f, 0x88), new Length(100.0, Unit.Percent))),
-					new LinearGradientAngle(LinearGradientAngleKind.ToBottom)
-					);
-
-			// Add all the demo buttons to the button list
-			foreach (DemoId cur in Enum.GetValues(typeof(DemoId)))
-				if (DemoId.None != cur)
-					AddDemoButton(cur, buttonBackground);
+			AddDemo(typeof(Rectangle_Class.View));
+			AddDemo(typeof(Ellipse_Class.View));
+			AddDemo(typeof(Path_Class.View));
+			AddDemo(typeof(Image_Class.View));
+			AddDemo(typeof(TextBlock_Class.View));
+			AddDemo(typeof(TextBox_Class.View));
+			AddDemo(typeof(Border_Class.View));
+			AddDemo(typeof(Button_Class.View));
+#if ! WASM // Not ready in time for v0.2.0
+			AddDemo(typeof(CheckBox_Class.View));
+#endif
+			AddDemo(typeof(Flex_Class.View));
+			AddDemo(typeof(ScrollViewer_Class.View));
+			AddDemo(typeof(Alignment_Properties.View));
+			AddDemo(typeof(Calculator.View));
+			AddDemo(typeof(Tip_Calculator.View));
 		}
 
 		/*******************************************************************************
 			AddButton()
 		*******************************************************************************/
 		/// <summary>
-		/// Adds a demo button. Note that the <see cref="FrameworkElement.Tag"/> property
-		/// is used to keep track of the <paramref name="demoId"/>.
+		/// Adds a demo for use.
 		/// </summary>
-		/// <param name="demoId">The demonstration to associate with the button.</param>
-		void AddDemoButton(DemoId demoId, Brush background)
+		void AddDemo(Type demoType)
 		{
-			// Create a demo button
-			var button = new Button()
-			{
-				Margin = new Thickness(new Length(5, Unit.Px)),
-				BorderThickness = new Thickness(new Length(1, Unit.Px)),
-				Background = background,
-				BorderBrush = Common.GetSolidColorBrush(Colors.SlateBlue),
-				CornerRadius = new CornerRadius(new Length(0, Unit.Px), NormalButtonCornerRadius, NormalButtonCornerRadius, new Length(12, Unit.Px)),
-				Padding = new Thickness(new Length(4, Unit.Px)),
-				Tag = demoId,
-				Child = new TextBlock() // Use a TextBlock as the button's child.
-				{
-					Text = demoId.ToString(),
-					Foreground = Common.GetSolidColorBrush(Colors.White),
-					HorizontalAlignment = HorizontalAlignment.Center,
-					IsHitTestVisible = false,
-				}
-			};
+			var name = demoType.Namespace.Split('.').Last().Replace('_', ' ');
+			//name = Regex.Replace(name, "(\\B[A-Z])", " $1");
 
-			// Handle the Click event
-			button.Click += DemoButton_Click;
-
-			// Finally, add the button to the list of buttons
+			var button = new MenuButton() { CommandParameter = demoType, Text = name };
 			e_buttons.Children.Add(button);
 		}
 
 		/*******************************************************************************
-			DemoButton_Click()
+			e_homeButton_Click()
 		*******************************************************************************/
-		/// <summary>
-		/// Handles any demo button clicks.
-		/// </summary>
-		void DemoButton_Click(object sender, RoutedEventArgs e)
-		{
-			// Determine which demo was requested
-			var id = (DemoId)((Button)sender).Tag;
 
-			if (id == currentDemoId)
-				return;
-
-			// Run the requested demo
-			switch (id)
-			{
-				case DemoId.LayoutAlignment:
-					ShowDemo(id, new LayoutAlignment_Demo());
-					break;
-				case DemoId.TextBlock:
-					ShowDemo(id, new TextBlock_Demo());
-					break;
-				case DemoId.Rectangle:
-					ShowDemo(id, new Rectangle_Demo());
-					break;
-				case DemoId.Ellipse:
-					ShowDemo(id, new Ellipse_Demo());
-					break;
-				case DemoId.Border:
-					ShowDemo(id, new Border_Demo());
-					break;
-				case DemoId.Image:
-					ShowDemo(id, new Image_Demo());
-					break;
-				case DemoId.ScrollViewer:
-					ShowDemo(id, new ScrollViewer_Demo());
-					break;
-				case DemoId.TextBox:
-					ShowDemo(id, new TextBox_Demo());
-					break;
-				case DemoId.Flex:
-					ShowDemo(id, new Flex_Demo());
-					break;
-				case DemoId.Calculator:
-					ShowDemo(id, new Calculator.Calculator_Demo());
-					break;
-				case DemoId.TipCalculator:
-					ShowDemo(id, new TipCalculator.TipCalculator_Demo());
-					break;
-			}
-		}
+		void e_homeButton_Click(object sender, RoutedEventArgs e) => ShowDemo(null);
 
 		/*******************************************************************************
 			ShowDemo()
 		*******************************************************************************/
-		/// <summary>
-		/// Shows the requested demo. If <paramref name="newDemo"/> is null then the
-		/// app returns to the home state.
-		/// </summary>
-		/// <param name="newDemo"></param>
-		void ShowDemo(DemoId demoId, UIElement newDemo)
+
+		void ShowDemo(Type newDemoType)
 		{
-			if (null != currentDemo)
-				e_scollViewer.Child = null;
+			// If there is currently a demo being shows then remove it
+			if (null != CurrentDemo)
+				e_scrollViewer.Child = null;
 
-			if (null != newDemo)
-				e_scollViewer.Child = newDemo;
-
-			currentDemoId = demoId;
-			currentDemo = newDemo;
+			// If no demo was requested then reset
+			if (null == newDemoType)
+				CurrentDemo = null;
+			// Create and set the new demo
+			else
+			{
+				CurrentDemo = (UIElement)Activator.CreateInstance(newDemoType);
+				e_scrollViewer.Child = CurrentDemo;
+			}
 		}
-
 	}
 }

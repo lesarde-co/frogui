@@ -1,0 +1,43 @@
+﻿<Grid x:Class="Demo.Flex_Class.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="namespace:Demo.Flex_Class"
+		xmlns:frogui="namespace:Lesarde.Frogui"
+		ColumnCount="5"
+		RowDefinitions="40px,40px,1*"
+		>
+
+	<Grid.AssetSheet>
+		<Constants>
+			<Brush Name="UnselectedBrush">LightGray</Brush>
+			<Brush Name="SelectedBrush">Yellow</Brush>
+		</Constants>
+		<Styles>
+			<Style Name="TextBlockStyle" TargetType="TextBlock"
+				FontSize="Large"
+				/>
+			<Style Name="TitleStyle" TargetType="TextBlock" BasedOn="TextBlockStyle"
+				FontWeight="Bold"
+				Margin="8px"
+				Foreground="White"
+				/>
+			<Style Name="OptionStyle" TargetType="TextBlock" BasedOn="TextBlockStyle"
+				Foreground="UnselectedBrush"
+				/>
+		</Styles>
+	</Grid.AssetSheet>
+
+	<TextBlock Style="TitleStyle" Text="Direction:" Anchor="0,0"/>
+	<TextBlock Style="TitleStyle" Text="Wrap:" Anchor="0,1"/>
+
+	<TextBlock Style="OptionStyle" Text="Row" Anchor="1,0" Tag="frogui:Controls.FlexDirection.Row" PointerPressed="ChangeDirection"/>
+	<TextBlock Name="e_directionRowReverse"  Style="OptionStyle" Text="Row Reverse" Anchor="2,0" Tag="frogui:Controls.FlexDirection.RowReverse" PointerPressed="ChangeDirection"/>
+	<TextBlock Style="OptionStyle" Text="Column" Anchor="3,0" Tag="frogui:Controls.FlexDirection.Column" PointerPressed="ChangeDirection"/>
+	<TextBlock Style="OptionStyle" Text="Column Reverse" Anchor="4,0" Tag="frogui:Controls.FlexDirection.ColumnReverse" PointerPressed="ChangeDirection"/>
+
+	<TextBlock Style="OptionStyle" Text="No Wrap" Anchor="1,1" Tag="frogui:Controls.FlexWrapping.NoWrap" PointerPressed="ChangeWrapping"/>
+	<TextBlock Style="OptionStyle" Text="Wrap Row" Anchor="2,1" Tag="frogui:Controls.FlexWrapping.Wrap" PointerPressed="ChangeWrapping"/>
+	<TextBlock Name="e_wrappingWrapReverse" Style="OptionStyle" Text="Wrap Reverse" Anchor="3,1" Tag="frogui:Controls.FlexWrapping.WrapReverse" PointerPressed="ChangeWrapping"/>
+
+	<Flex Name="e_flex"  Direction="RowReverse" Wrapping="WrapReverse" Anchor="0,5,2,1"/>
+
+</Grid>

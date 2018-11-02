@@ -1,0 +1,45 @@
+﻿<Flex x:Class="Demo.CheckBox_Class.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Button_Class"
+		Margin="16px"
+		Direction="Column"
+		>
+
+	<Flex.AssetSheet>
+		<Styles>
+			<Style Name="FunCheckBox" TargetType="Button"
+				Margin = "5px"
+				VerticalAlignment="Top"
+				>
+			</Style>
+
+			<Style Name="FunText" TargetType="TextBlock"
+				Selectable="false"
+				Foreground="White"
+				FontSize="Small"
+				/>
+
+		</Styles>
+	</Flex.AssetSheet>
+
+	<TextBlock Foreground="LimeGreen" FontSize="Medium" Text="Not functional in this release." Margin="24px"/>
+	<TextBlock Foreground="LimeGreen" FontSize="Medium" Text="Clicking breaks demo." Margin="24px"/>
+
+	<CheckBox Style="FunCheckBox">
+		<Image Source="root:Common.SunImage" HorizontalAlignment = "Center" VerticalAlignment = "Center" Width="64" Height="64"/>
+	</CheckBox>
+
+	<CheckBox Style="FunCheckBox">
+		<TextBlock Text="Visit Zoo" Style="FunText"/>
+	</CheckBox>
+
+	<CheckBox Style="FunCheckBox">
+		<TextBlock Text="Meet Daughter's new Friend" Style="FunText"/>
+	</CheckBox>
+
+	<CheckBox Style="FunCheckBox">
+		<TextBlock Text="Listen to Gumbo Radio" Style="FunText"/>
+	</CheckBox>
+
+</Flex>
