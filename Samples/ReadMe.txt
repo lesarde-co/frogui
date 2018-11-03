@@ -1,3 +1,0 @@
-Frogui Samples
-==============
-
