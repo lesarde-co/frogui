@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <FileUpgradeFlags>40</FileUpgradeFlags>
@@ -9,7 +9,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.1.442" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
   </ItemGroup>
   <ItemGroup>

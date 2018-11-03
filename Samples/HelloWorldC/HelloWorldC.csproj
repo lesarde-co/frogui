@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.1.442" />
+	  <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.2.0" />
   </ItemGroup>
 
   <ItemGroup>
