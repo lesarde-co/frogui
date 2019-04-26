@@ -1,10 +1,32 @@
 ﻿using Lesarde.Frogui;
+using Lesarde.Frogui.ComponentModel;
 using Lesarde.Frogui.Controls;
+using Lesarde.Frogui.Controls.Primitives;
+using Lesarde.Frogui.Input;
 using Lesarde.Frogui.Media;
+using Lesarde.Frogui.Media.Effects;
+using Lesarde.Frogui.Shapes;
 using System;
+using System.Collections;
+using System.Linq;
+using System.Reactive.Linq;
 
 namespace Demo
 {
+	public class ExampleView : Pixy
+	{
+		public ExampleView()
+		{
+			HorizontalAlignment = HorizontalAlignment.Left;
+			Foreground = SolidColorBrushes.White.Brush;
+			Margin = Thickness.InPixels(3);
+			Layout = PixyLayout.TextRightOfImage;
+			Gap = Length.InPixels(16);
+			SetBinding(TextProperty, new Lesarde.Frogui.Data.Binding(nameof(Example.DisplayName)));
+			SetBinding(ImageSourceProperty, new Lesarde.Frogui.Data.Binding(nameof(Example.Icon)));
+		}
+	}
+
 	/***************************************************************************************************
 		MainWindow class (code-behind)
 	***************************************************************************************************/
@@ -18,56 +40,46 @@ namespace Demo
 	public partial class MainWindow : Window
     {
 		/***********************************************************
-			DemoId enum
-		***********************************************************/
-		/// <summary>
-		/// Contains an item for each demonstration in this app.
-		/// </summary>
-		enum DemoId
-		{
-			None,
-			LayoutAlignment,
-			TextBlock,
-			Image,
-			Rectangle,
-			Ellipse,
-			Border,
-			ScrollViewer,
-			TextBox,
-			Flex,
-			Calculator,
-			TipCalculator
-		}
-
-		/***********************************************************
-			read-only values
-		***********************************************************/
-
-		/// <summary>
-		/// Create a "normal" corner radius for buttons for reuse.
-		/// </summary>
-		readonly Length NormalButtonCornerRadius = new Length(5, Unit.Px);
-
-		/***********************************************************
 			Me property
 		***********************************************************/
 
 		public static MainWindow Me { get; private set; }
 
 		/***********************************************************
-			variables
+			PropertyEditorManager property
+		***********************************************************/
+
+		PropertyEditorManager PropertyEditorManager { get; }
+
+		/***********************************************************
+			properties
 		***********************************************************/
 
 		/// <summary>
-		/// Keeps track of the current demo id.
+		/// Keeps track of the current example.
 		/// </summary>
-		DemoId currentDemoId;
+		//Example CurrentExample => null == CurrentDemo ? null : CurrentDemo.GetType();
+		Example CurrentExample { get; set; }
 
 		/// <summary>
 		/// Keeps track of the current demo object.
 		/// </summary>
-		UIElement currentDemo;
-		
+		Element CurrentExampleElement { get; set; }
+
+		IExampleView CurrentExampleView => (IExampleView)CurrentExampleElement;
+
+		public BrushPicker e_brushPicker { get; set; }
+
+		/***********************************************************
+			Commands class
+		***********************************************************/
+
+		public static class Commands
+		{
+			//public static RoutedCommand<Type> RunDemo { get; } = new RoutedCommand<Type>();
+			public static RoutedCommand<Example> RunDemo { get; } = new RoutedCommand<Example>();
+		}
+
 		/*******************************************************************************
 			$
 		*******************************************************************************/
@@ -78,186 +90,253 @@ namespace Demo
 		{
 			Me = this;
 
+			// Prepare the property editor manager
+			PropertyEditorManager = new PropertyEditorManager();
+
+			PropertyEditorManager.RegisterDefaultEditor(typeof(VaryDesign), typeof(EnumImageEditor<VaryDesign>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(bool), typeof(BooleanEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(BorderPattern), typeof(BorderPatternEditor));
+
+			//PropertyEditorManager.RegisterDefaultEditor(typeof(Brush), typeof(BrushEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Brush), typeof(BrushEditor));
+
+			PropertyEditorManager.RegisterDefaultEditor(typeof(BorderBackgroundClip), typeof(EnumTextEditor<BorderBackgroundClip>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(CheckDesign), typeof(EnumTextEditor<CheckDesign>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(CheckState), typeof(EnumTextEditor<CheckState>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(CornerRadius), typeof(CornerRadiusEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(CornerRadiusMode), typeof(EnumTextEditor<CornerRadiusMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Decimal), typeof(DecimalEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Direction), typeof(EnumTextEditor<Direction>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Double), typeof(DoubleEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(DroplistInputMode), typeof(EnumTextEditor<DroplistInputMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FlexDirection), typeof(EnumTextEditor<FlexDirection>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FlexWrapping), typeof(EnumTextEditor<FlexWrapping>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FontFamily), typeof(FontFamilyEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FontSize), typeof(FontSizeEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FontStretch), typeof(EnumImageEditor<FontStretch>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FontStyle), typeof(EnumTextEditor<FontStyle>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(FontWeight), typeof(FontWeightEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(IEnumerable), typeof(ItemsSourceEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(ImageSource), typeof(ImageSourceEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(int), typeof(IntEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Length), typeof(LengthEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(NumericTypeFilter), typeof(EnumTextEditor<NumericTypeFilter>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Orientation), typeof(EnumImageEditor<Orientation>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(PixyLayout), typeof(EnumImageEditor<PixyLayout>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(PopupClipMode), typeof(EnumTextEditor<PopupClipMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(PopupPlacementMode), typeof(EnumImageEditor<PopupPlacementMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(PopupTransitionMode), typeof(EnumTextEditor<PopupTransitionMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(TextBoxResize), typeof(EnumTextEditor<TextBoxResize>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(ScrollBarVisibility), typeof(EnumTextEditor<ScrollBarVisibility>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(SelectionMode), typeof(EnumTextEditor<SelectionMode>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(SolidColorBrush), typeof(NullableSolidBrushColorEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Stretch), typeof(EnumTextEditor<Stretch>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(string), typeof(TextEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(SliderPreviewSource), typeof(EnumTextEditor<SliderPreviewSource>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(SymbolPlacement), typeof(EnumTextEditor<SymbolPlacement>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(TextAlignment), typeof(EnumImageEditor<TextAlignment>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(TextDecorationLines), typeof(EnumImageEditor<TextDecorationLines>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(TextDecorationStyle), typeof(EnumImageEditor<TextDecorationStyle>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(Thickness), typeof(ThicknessEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(TrackEdgeDesign), typeof(EnumImageEditor<TrackEdgeDesign>));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(GraphicsEffect), typeof(GraphicsEffectEditor));
+			PropertyEditorManager.RegisterDefaultEditor(typeof(VaryButtonPlacement), typeof(EnumTextEditor<VaryButtonPlacement>));
+
+			PropertyEditorManager.RegisterEditor(typeof(double), PropertyEditorHint.Double_Percent, typeof(PercentEditor));
+
 			InitializeComponent();
 
-			// Set the background of this window
-			Background = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgb(0x00, 0x00, 0x20), new Length(20.0, Unit.Percent)))
-					.Add(new GradientStop(Colors.RoyalBlue, new Length(100.0, Unit.Percent))));
-			
-			// Create the home button
-			var e_homeButton = new Button()
-			{
-				Margin = new Thickness(new Length(5, Unit.Px)),
-				BorderThickness = new Thickness(new Length(1.5, Unit.Px)),
-				Background = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgba(0x00, 0x00, 0x00, 0.33), new Length(0.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0xff, 0xff, 0xff, 0.33), new Length(46.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0xff, 0xff, 0xff, 0.33), new Length(64.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgba(0x00, 0x00, 0x00, 0.33), new Length(100.0, Unit.Percent))),
-					new LinearGradientAngle(LinearGradientAngleKind.ToBottom)
-					),
-				BorderBrush = Common.GetSolidColorBrush(Colors.DarkSlateBlue),
-				CornerRadius = new CornerRadius(NormalButtonCornerRadius),
-				Padding = new Thickness(new Length(4, Unit.Px), new Length(8, Unit.Px), new Length(4, Unit.Px), new Length(8, Unit.Px)),
+			((IPropertyEditor)e_backgroundEditor).BindToSourceProperty(e_designSurface, Box.BackgroundProperty);
+			e_backgroundEditor.Brush = ImageBrushes.CheckeredDark.Brush;
 
-				Child = new Image()
+#if x
+			CommandBindings.Add(Commands.RunDemo)
+				// .Throttle(new TimeSpan(1000)) // Slow down happy clicks. NOTE: For Frogui v 0.2.0, avoid concurrent Reactive Extension (Rx) methods for routed commands
+				.Where(e => e.Parameter != CurrentExample)  // Only allow a different demo request through
+				.Subscribe(e =>
 				{
-					Source = Common.lesardeLogoImage,
-					HorizontalAlignment = HorizontalAlignment.Center,
-					VerticalAlignment = VerticalAlignment.Center,
-					Opacity = 0.8
-				}
-			};
-
-			// Handle the home button click event.
-			e_homeButton.Click += (sender, e) => ShowDemo(DemoId.None, null);
-
-			// Add the home button to the button list
-			e_buttons.Children.Add(e_homeButton);
+					// If just a query then indicate the command can execute
+					if (e.IsQuery)
+						e.CanExecute = true;
+					// Execute the command
+					else
+					{
+						ShowExample(e.Parameter);
+						e.Handled = true;
+					}
+				});
+#endif
 
 #if WASM
-			var BuildName = "wasm";
+			var BuildName = "WebAssembly";
 #else
-			var BuildName = "os";
+			var BuildName = "Windows";
 #endif
-			e_buttons.Children.Add(new TextBlock()
-			{
-				Text = BuildName,
-				HorizontalAlignment = HorizontalAlignment.Center,
-				Foreground = Common.GetSolidColorBrush(Colors.DarkSlateBlue),
-				FontSize = Common.FontSizeMix[0]
-			});
+
+			e_buildType.Text = BuildName;
 
 			Title = $"Frogui Demo ({BuildName})";
 
-
-			// Create the demo button background
-			var buttonBackground = new LinearGradientBrush(
-				new GradientStopCollection()
-					.Add(new GradientStop(Color.FromRgb(0x3f, 0x92, 0xc6), new Length(0.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x25, 0x74, 0xa3), new Length(56.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x1d, 0x5f, 0x88), new Length(64.0, Unit.Percent)))
-					.Add(new GradientStop(Color.FromRgb(0x1d, 0x5f, 0x88), new Length(100.0, Unit.Percent))),
-					new LinearGradientAngle(LinearGradientAngleKind.ToBottom)
-					);
-
-			// Add all the demo buttons to the button list
-			foreach (DemoId cur in Enum.GetValues(typeof(DemoId)))
-				if (DemoId.None != cur)
-					AddDemoButton(cur, buttonBackground);
+#if x
+			foreach (var cur in Examples)
+				AddDemo(cur);
+#else
+			e_exampleList.ItemViewMatcher = new SingleModelViewMatcher(typeof(ExampleView));
+			e_exampleList.ItemsSource = Examples;
+			e_exampleList.AddPropertyChangedListener(Selector.SelectedItemProperty, v => ShowExample((Example)v), true);
+			e_exampleList.SelectedIndex = 0;
+#endif
 		}
 
 		/*******************************************************************************
-			AddButton()
+			ExampleSelectionChanged()
+		*******************************************************************************/
+
+		//void ExampleSelectionChanged(object selectedItem)
+		//{
+		//	var example = (Example)selectedItem;
+
+
+		//}
+
+		/*******************************************************************************
+			CreateStyle()
 		*******************************************************************************/
 		/// <summary>
-		/// Adds a demo button. Note that the <see cref="FrameworkElement.Tag"/> property
-		/// is used to keep track of the <paramref name="demoId"/>.
+		/// Helper method that creates a new style.
 		/// </summary>
-		/// <param name="demoId">The demonstration to associate with the button.</param>
-		void AddDemoButton(DemoId demoId, Brush background)
+		/// <param name="targetType">The target type of the style.</param>
+		/// <param name="setterParts">Object pairs (<see cref="DependencyProperty"/>
+		/// and <see cref="object"/>) that are converted into <see cref="Setter"/>
+		/// objects.
+		/// </param>
+		/// <returns></returns>
+		static Style CreateStyle(Type targetType, params object[] setterParts)
 		{
-			// Create a demo button
-			var button = new Button()
-			{
-				Margin = new Thickness(new Length(5, Unit.Px)),
-				BorderThickness = new Thickness(new Length(1, Unit.Px)),
-				Background = background,
-				BorderBrush = Common.GetSolidColorBrush(Colors.SlateBlue),
-				CornerRadius = new CornerRadius(new Length(0, Unit.Px), NormalButtonCornerRadius, NormalButtonCornerRadius, new Length(12, Unit.Px)),
-				Padding = new Thickness(new Length(4, Unit.Px)),
-				Tag = demoId,
-				Child = new TextBlock() // Use a TextBlock as the button's child.
-				{
-					Text = demoId.ToString(),
-					Foreground = Common.GetSolidColorBrush(Colors.White),
-					HorizontalAlignment = HorizontalAlignment.Center,
-					IsHitTestVisible = false,
-				}
-			};
+			var s = new Style(targetType);
 
-			// Handle the Click event
-			button.Click += DemoButton_Click;
+			for (var i = 0; i < setterParts.Length / 2; ++i)
+				s.Setters.Add(new Setter((DependencyProperty)setterParts[i * 2], setterParts[i * 2 + 1]));
 
-			// Finally, add the button to the list of buttons
-			e_buttons.Children.Add(button);
+			return s;
 		}
 
 		/*******************************************************************************
-			DemoButton_Click()
+			e_homeButton_Click()
 		*******************************************************************************/
-		/// <summary>
-		/// Handles any demo button clicks.
-		/// </summary>
-		void DemoButton_Click(object sender, RoutedEventArgs e)
+
+		void e_homeButton_Click(object sender, RoutedEventArgs e) => ShowExample(null);
+
+		/*******************************************************************************
+			e_showProperties_Checked/Unchecked()
+		*******************************************************************************/
+
+		void e_showProperties_Checked(object sender, RoutedEventArgs e) => SyncPropertiesPanel();
+
+		void e_showProperties_Unchecked(object sender, RoutedEventArgs e) => SyncPropertiesPanel();
+
+		/*******************************************************************************
+			ShowExample()
+		*******************************************************************************/
+
+		void ShowExample(Example newExample)
 		{
-			// Determine which demo was requested
-			var id = (DemoId)((Button)sender).Tag;
-
-			if (id == currentDemoId)
-				return;
-
-			// Run the requested demo
-			switch (id)
+			// If there is currently a demo being shows then remove it
+			if (null != CurrentExample)
 			{
-				case DemoId.LayoutAlignment:
-					ShowDemo(id, new LayoutAlignment_Demo());
-					break;
-				case DemoId.TextBlock:
-					ShowDemo(id, new TextBlock_Demo());
-					break;
-				case DemoId.Rectangle:
-					ShowDemo(id, new Rectangle_Demo());
-					break;
-				case DemoId.Ellipse:
-					ShowDemo(id, new Ellipse_Demo());
-					break;
-				case DemoId.Border:
-					ShowDemo(id, new Border_Demo());
-					break;
-				case DemoId.Image:
-					ShowDemo(id, new Image_Demo());
-					break;
-				case DemoId.ScrollViewer:
-					ShowDemo(id, new ScrollViewer_Demo());
-					break;
-				case DemoId.TextBox:
-					ShowDemo(id, new TextBox_Demo());
-					break;
-				case DemoId.Flex:
-					ShowDemo(id, new Flex_Demo());
-					break;
-				case DemoId.Calculator:
-					ShowDemo(id, new Calculator.Calculator_Demo());
-					break;
-				case DemoId.TipCalculator:
-					ShowDemo(id, new TipCalculator.TipCalculator_Demo());
-					break;
+				var exampleView = (IExampleView)CurrentExampleElement;
+				exampleView.MainElement.ClearBindings();
+
+				e_exampleHost.Child = null;
+				CurrentExampleElement = null;
+				e_notes.Text = null;
+				e_funFact.Text = null;
+				HidePropertiesPanel();
 			}
+
+			CurrentExample = newExample;
+
+			// Create and set the new demo
+			if (null != newExample)
+			{
+				CurrentExampleElement = (Element)Activator.CreateInstance(newExample.Type);
+
+				// Have the example element (which frames the main example element) turn off clipping so shadows show up
+				CurrentExampleElement.ClipHorizontalOverflow = false;
+				CurrentExampleElement.ClipVerticalOverflow = false;
+
+				//var exampleView = (IExampleView)CurrentExampleElement;
+
+				e_exampleHost.Child = CurrentExampleElement;
+				e_notes.Text = newExample.Notes;
+				e_funFact.Text = newExample.FunFact;
+
+				// Prepare Presets area
+				if (null == newExample.Presets)
+					e_presetArea.Visibility = Visibility.Collapsed;
+				else
+				{
+					e_presetArea.Visibility = Visibility.Visible;
+					e_presetSelector.Init(newExample.Presets, CurrentExampleView);
+				}
+
+				//if (newExample.Prop != PROP.None)
+				//{
+				//	e_propertiesEditorScrollViewer.Visibility = Visibility.Visible;
+
+				//	foreach (var segment in PropertyEditorManager.CreateEditorSegments(CurrentExampleView.MainElement, (doType, dp) => doType != typeof(Cascader) || PROP.All == newExample.Prop))
+				//		e_propertiesEditor.Members.Add((Element)segment.Editor, new Placecard(segment.Label));
+				//}
+			}
+
+			//CurrentExample = newExample;
+
+			SyncPropertiesPanel();
 		}
 
 		/*******************************************************************************
-			ShowDemo()
+			HidePropertiesPanel()
 		*******************************************************************************/
-		/// <summary>
-		/// Shows the requested demo. If <paramref name="newDemo"/> is null then the
-		/// app returns to the home state.
-		/// </summary>
-		/// <param name="newDemo"></param>
-		void ShowDemo(DemoId demoId, UIElement newDemo)
+
+		void HidePropertiesPanel()
 		{
-			if (null != currentDemo)
-				e_scollViewer.Child = null;
-
-			if (null != newDemo)
-				e_scollViewer.Child = newDemo;
-
-			currentDemoId = demoId;
-			currentDemo = newDemo;
+			e_propertiesEditor.Members.Clear();
+			e_propertiesEditorScrollViewer.Visibility = Visibility.Collapsed;
 		}
 
+		/*******************************************************************************
+			ShowPropertiesPanel()
+		*******************************************************************************/
+
+		void ShowPropertiesPanel()
+		{
+			e_propertiesEditorScrollViewer.Visibility = Visibility.Visible;
+
+			foreach (var segment in PropertyEditorManager.CreateEditorSegments(CurrentExampleView.MainElement, (doType, dp) => doType != typeof(Cascader) || PROP.All == CurrentExample.Prop))
+				e_propertiesEditor.Members.Add((Element)segment.Editor, new Placecard(segment.Label));
+		}
+
+		/*******************************************************************************
+			SyncPropertiesPanel()
+		*******************************************************************************/
+
+		void SyncPropertiesPanel()
+		{
+			if (e_showProperties.IsChecked)
+			{
+				e_brushPicker = new BrushPicker();
+				e_grid.Children.Add(e_brushPicker, new GridAnchor(2, 2));
+			}
+			else
+			{
+				e_grid.Children.Remove(e_brushPicker);
+				e_brushPicker = null;
+			}
+
+			if (null != CurrentExample && e_showProperties.IsChecked && PROP.None != CurrentExample.Prop)
+				ShowPropertiesPanel();
+			else
+				HidePropertiesPanel();
+		}
 	}
 }

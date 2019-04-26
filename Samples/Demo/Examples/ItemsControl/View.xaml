@@ -1,0 +1,11 @@
+﻿<Decorator x:Class="Demo.Example_ItemsControl.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<ItemsControl Name="e_itemsControl">
+	</ItemsControl>
+
+</Decorator>

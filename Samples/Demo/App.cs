@@ -1,4 +1,5 @@
 ﻿using Lesarde.Frogui;
+using Lesarde.Frogui.Input;
 
 namespace Demo
 {

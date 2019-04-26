@@ -1,0 +1,9 @@
+﻿<!--
+	This is the declarative portion of the App class.
+ -->
+<SinglePageApplication x:Class="HelloWorldB.App"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="namespace:HelloWorldB"
+	StartupType="local:Greeting"
+	>
+</SinglePageApplication>

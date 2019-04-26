@@ -1,0 +1,13 @@
+﻿<Border x:Class="Demo.Example_Home.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		HorizontalAlignment="Stretch"
+		VerticalAlignment="Stretch"
+		Background="White"
+		BorderThickness="1px"
+		BorderBrush="Gray"
+		Padding="20px"
+		>
+
+	<HtmlBlock Name="e_htmlBlock" IsHitTestVisible = "true"/>
+
+</Border>

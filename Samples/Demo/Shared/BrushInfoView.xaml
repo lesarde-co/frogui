@@ -1,0 +1,15 @@
+﻿<TextBlock x:Class="Demo.BrushInfoView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:root="namespace:Demo"
+	Background="{Binding Brush}"
+	Text="{Binding Name}"
+	FontWeight="Bold"
+	FontFamily="root:Common.FontFamilies.CourierNew"
+	FontSize = "13pt"
+	Margin="2px"
+	Padding="4px"
+	IsHitTestVisible="false"
+	Selectable="false"
+	Width="240"
+	/>
+

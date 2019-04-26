@@ -1,0 +1,105 @@
+﻿<Border x:Class="Demo.Example_Tip_Calculator.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_Tip_Calculator"
+		Background="#74BDBF"
+		Padding="40px"
+		>
+
+	<Border.AssetSheet>
+		<Constants>
+			<Length Name="SegmentLength">360px</Length>
+			<FontFamily Name="FontFamily">helvetica</FontFamily>
+			<string Name="PerPerson">per person</string>
+			<FontSize Name="InputFontSize">XLarge</FontSize>
+			<Brush Name="LabelForeground">White</Brush>
+			<Brush Name="InputForeground">Black</Brush>
+		</Constants>
+		<Styles>
+			<Style Name="SegmentStyle" TargetType="Border"
+				BackgroundClip="ContentBox"
+				Background="#0175C0"
+				BorderThickness="4px"
+				CornerRadius="20px"
+				Height="SegmentLength"
+				Width="SegmentLength"
+				/>
+			<Style Name="GridStyle" TargetType="Grid"
+				Padding="32px"
+				/>
+			<Style Name="InputStyle" TargetType="NumericEdit"
+				TypeFilter="Decimal"
+				SymbolBackground="root:SolidColorBrushes.Silver.Brush"
+				SymbolForeground="root:SolidColorBrushes.White.Brush"
+				Symbol="$"
+				Padding="10px"
+				FontFamily="FontFamily"
+				FontSize="InputFontSize"
+				FontWeight="Lighter"
+				TextAlignment="Right"
+				Foreground="InputForeground"
+				/>
+
+			<!-- V-erticalAlignment="Center"-->
+			<Style Name="LabelStyle" TargetType="TextBlock"
+				Foreground="LabelForeground"
+				FontFamily="FontFamily"
+				FontSize="Medium"
+				/>
+			<Style Name="PrimaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
+				
+				/>
+			<!-- V-erticalAlignment="Bottom"-->
+
+			<Style Name="SecondaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
+				Foreground="LightBlue"
+				/>
+<!-- 				V-erticalAlignment="Top" -->
+
+			<Style Name="TotalOutputStyle" TargetType="local:MoneyBlock" BasedOn="LabelStyle"
+				FontSize="XxLarge"
+				TextAlignment="Right"
+				/>
+
+			<Style Name="IntEditStyle" TargetType="NumericEdit"
+				CornerRadius="6px"
+				VaryButtonBackground="root:SolidColorBrushes.MediumBlue.Brush"
+				VaryButtonFill="root:SolidColorBrushes.White.Brush"
+				VaryButtonLength="60px"
+				VaryButtonDesign="Sign"
+				VaryButtonPlacement="VerticalEnds"
+				Padding="10px"
+				FontFamily="FontFamily"
+				FontSize="InputFontSize"
+				FontWeight="Lighter"
+				TextAlignment="Center"
+				Foreground="InputForeground"
+				/>
+
+		</Styles>
+	</Border.AssetSheet>
+
+	<Flex Name="e_flex" Wrapping="Wrap">
+		<Border Name="e_input" Style="SegmentStyle">
+			<Grid Name="e_inputGrid" RowCount="6" Style="GridStyle">
+				<TextBlock Style="LabelStyle" Text = "Bill" />
+				<NumericEdit Name="e_bill" Anchor="0,1" Style="InputStyle" NumberDecimal="{Binding Bill, Mode=TwoWay}"/>
+				<TextBlock Anchor="0,2" Style="LabelStyle" Text = "Tip %" />
+				<NumericEdit Name="e_tipPercent" Anchor="0,3" Style="IntEditStyle" NumberInt32="{Binding TipPercent, Mode=TwoWay}"/>
+				<TextBlock Anchor="0,4" Style="LabelStyle" Text = "Number of People" />
+				<NumericEdit Name="e_numPeople" Anchor="0,5" Style="IntEditStyle" NumberInt32="{Binding NumPeople, Mode=TwoWay}"/>
+			</Grid>
+		</Border>
+		<Border Name="e_output" Style="SegmentStyle">
+			<Grid Name="e_outputGrid" ColumnCount="2" RowCount="5" Style="GridStyle">
+				<TextBlock Style="PrimaryOutputLabelStyle" Text = "Tip" />
+				<TextBlock Name="e_tipPerPersonLabel" Anchor="0,1" Style="SecondaryOutputLabelStyle" Text="PerPerson"/>
+				<TextBlock Anchor="0,3" Style="PrimaryOutputLabelStyle" Text="Total" />
+				<TextBlock Name="e_totalPerPersonLabel" Anchor="0,4" Style="SecondaryOutputLabelStyle" Text="PerPerson"/>
+				<local:MoneyBlock Anchor="1,0,1,2" Style="TotalOutputStyle" Money="{Binding TipPerPerson}"/>
+				<local:MoneyBlock Anchor="1,3,1,2" Style="TotalOutputStyle" Money="{Binding TotalPerPerson}"/>
+			</Grid>
+		</Border>
+	</Flex>
+
+</Border>

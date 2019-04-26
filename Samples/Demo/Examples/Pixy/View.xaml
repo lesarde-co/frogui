@@ -1,0 +1,10 @@
+﻿<Decorator
+	x:Class="Demo.Example_Pixy.View"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	HorizontalAlignment="Center"
+	VerticalAlignment="Center"
+	>
+
+	<Pixy Name="e_pixy"/>
+
+</Decorator>

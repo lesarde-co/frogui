@@ -1,0 +1,51 @@
+﻿<Flex x:Class="Demo.Example_Observable_A.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_Observable_A"
+		Margin="16px"
+		Direction="Column"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Flex.AssetSheet>
+		<Styles>
+
+			<Style Name="MyTextBlockStyle" TargetType="TextBlock"
+				Foreground="White"
+				FontSize="Small"
+				Margin="2px"
+				Background="DarkGray"
+				>
+			</Style>
+
+			<Style Name="MyTextBoxStyle" TargetType="TextBox"
+				Height="50px"
+				VerticalScrollBarVisibility="Auto"
+				>
+			</Style>
+
+		</Styles>
+	</Flex.AssetSheet>
+
+	<TextBlock FontSize="Large" Margin="0px,0px,0px,80px"  Foreground="Orange" Text="This feature does not work in Frogui WebAssembly due to the current development state of Microsoft's tool."/>
+
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb1 - The Text property is observed by the controls below."/>
+	<TextBox Name="e_tb1" Style="MyTextBoxStyle" Text="Kindness is the language which the deaf can hear and the blind can see."/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb2 - Simple observation."/>
+	<TextBox Name="e_tb2" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb3 - Delay() 2 seconds."/>
+	<TextBox Name="e_tb3" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb4 - Delay() 4 seconds."/>
+	<TextBox Name="e_tb4" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb5 - Replace() 'a' with '*'."/>
+	<TextBox Name="e_tb5" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb6 - Throttle() for 3 seconds."/>
+	<TextBox Name="e_tb6" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb7 - Buffer() for 1 second."/>
+	<TextBox Name="e_tb7" Style="MyTextBoxStyle"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_timeInterval - TimeInterval() records time interval between changes."/>
+	<TextBlock Name="e_timeInterval" Style="MyTextBlockStyle" Foreground="Green" FontSize="Small" />
+
+
+</Flex>

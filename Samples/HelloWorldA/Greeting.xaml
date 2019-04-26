@@ -1,0 +1,12 @@
+﻿<!--
+	This is the declarative portion of the Greeting class. This is where the
+	"Hello, World!" message is defined, as well as properties that specify
+	its appearance.
+ -->
+<TextBlock x:Class="HelloWorldA.Greeting"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Text = "Hello, World!"
+	FontSize = "Large"
+	HorizontalAlignment = "Center"
+	VerticalAlignment = "Center"
+	/>

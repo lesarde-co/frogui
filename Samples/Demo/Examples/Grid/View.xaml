@@ -1,0 +1,9 @@
+﻿<Decorator x:Class="Demo.Example_Grid.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Grid Name="e_grid"/>
+
+</Decorator>

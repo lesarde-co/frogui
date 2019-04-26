@@ -1,0 +1,36 @@
+﻿<Flex x:Class="Demo.Example_RadioButton.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_RadioButton"
+		Margin="16px"
+		Direction="Column"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Flex.AssetSheet>
+		<Styles>
+			<Style Name="FunRadioButton" TargetType="RadioButton"
+				Margin = "5px"
+				GroupName="FunGroup"
+				Foreground="root:SolidColorBrushes.White.Brush"
+				CheckBrush="root:SolidColorBrushes.Black.Brush"
+				Background="root:SolidColorBrushes.White.Brush"
+				BorderBrush="root:SolidColorBrushes.Black.Brush"
+				FontSize="Small"
+				>
+				<VistaManager>
+					<VistaGroup Name="Common">
+						<Vista Name="Hovered"
+						Background="root:SolidColorBrushes.LightBlue.Brush"
+						/>
+					</VistaGroup>
+				</VistaManager>
+			</Style>
+			<!-- V-erticalAlignment="Top"-->
+		</Styles>
+	</Flex.AssetSheet>
+	
+	<RadioButton Name="e_radioButton" Style="FunRadioButton"  />
+
+</Flex>

@@ -1,0 +1,11 @@
+﻿<Decorator x:Class="Demo.Example_ScrollBar.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_ScrollBar"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<ScrollBar Name="e_scrollbar"/>
+
+</Decorator>

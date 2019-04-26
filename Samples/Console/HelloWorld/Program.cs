@@ -1,4 +1,4 @@
-﻿namespace HelloWorld
+﻿namespace HelloWorldA
 {
 	/***************************************************************************************************
 		Program class
@@ -16,6 +16,8 @@
 		{
 			// Create and run the app
 			var app = new App();
+			app.ScopeType = typeof(Lesarde.Frogui.Scope);
+
 			app.Run();
 		}
 	}

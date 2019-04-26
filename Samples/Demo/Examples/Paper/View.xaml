@@ -1,0 +1,15 @@
+﻿<Decorator x:Class="Demo.Example_Paper.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Paper Name="e_paper">
+		<TextBlock TranslateX="50px" TranslateY="20px" Text="Hello, Frogui!" Foreground="Lime" FontSize="36"/>
+		<Image TranslateX="100px" TranslateY="80px" Source="root:Bitmaps.Disenchantment.Bitmap" Width="300px" Stretch="Fill"/>
+		<TextBlock TranslateX="10px" TranslateY="500px" Text="Please buy coffee!" Foreground="Black" FontSize="20px" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White" Padding="20" />
+		<Button TranslateX="500px" TranslateY="600px" Text="Fun Zone" Padding="20px" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black"/>
+		<ListBox TranslateX="600px" TranslateY="50px" Width="300px" Height="600px" ItemsSource="root:Common.LoremIpsumWords" BorderBrush="Gray" BorderThickness="1px" Foreground="White"/>
+	</Paper>
+</Decorator>

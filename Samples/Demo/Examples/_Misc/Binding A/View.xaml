@@ -1,0 +1,40 @@
+﻿<Flex x:Class="Demo.Example_Binding_A.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_Binding_A"
+		Margin="16px"
+		Direction="Column"
+		>
+
+	<Flex.AssetSheet>
+		<Styles>
+
+			<Style Name="MyTextBlockStyle" TargetType="TextBlock"
+				Foreground="LightGray"
+				FontSize="Small"
+				Margin="4px"
+				>
+			</Style>
+
+			<Style Name="MyTextBoxStyle" TargetType="TextBox"
+				Width="400px"
+				Height="150px"
+				VerticalScrollBarVisibility="Auto"
+				>
+			</Style>
+
+		</Styles>
+	</Flex.AssetSheet>
+
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb1   Text property {Binding Text, Mode=TwoWay} source e_tb2" />
+	<TextBlock Style="MyTextBlockStyle" Text="Notice how e_tb2 does not change until this control looses focus, because the TextBox.Text property defaults to UpdateSourceTrigger.LostFocus for binding." />
+	<TextBox Name="e_tb1" Style="MyTextBoxStyle" Text="{Binding Text, Mode=TwoWay}"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb2   Text property {Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged} source e_tb3" />
+	<TextBlock Style="MyTextBlockStyle" Text="Notice how e_tb3 changes immediately in reponse to changes here because UpdateSourceTrigger.PropertyChanged was used." />
+	<TextBox Name="e_tb2" Style="MyTextBoxStyle" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+	<TextBlock Style="MyTextBlockStyle" Text="e_tb3" />
+	<TextBlock Style="MyTextBlockStyle" Text="Notice how changes here are immediately reflected in e_tb2 (and e_tb1) because sources always immediately update their targets." />
+	<TextBox Name="e_tb3" Style="MyTextBoxStyle" Text="Civilization is the limitless multiplication of unnecessary necessities. ~ Mark Twain"/>
+
+
+</Flex>

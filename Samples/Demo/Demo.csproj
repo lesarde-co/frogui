@@ -1,40 +1,137 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\proj\Dev\Frogui\Backup\repo\Samples\Demo\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
-      
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+	<!--
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0-preview4.19216.2" />
+	-->
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
+    <None Update="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Border\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Calculator\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Ellipse\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Flex\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Pixy\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Paper\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Grid\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Image\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\NumericEdit\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Rectangle\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Popup\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\ScrollBar\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\ScrollViewer\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\HtmlBlock\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\TextBlock\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\TextBox\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Home\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Not Available\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="HomeButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Droplist\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Slider\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\Icon-TrackEdgeDesign-Round.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Scooby-Doo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Shared\BrushInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Shared\BitmapInfoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Shared\PersonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Shared\CartoonView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\Path\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Animation A\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Tip Calculator\View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Examples\_Misc\Calculator\MyAssets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
-
   <ItemGroup>
-    <Content Update="wwwroot\console.css">
-      <PackagePath>mono\</PackagePath>
-    </Content>
-    <Content Update="wwwroot\console.js">
-      <PackagePath>mono\</PackagePath>
-    </Content>
-    <Content Update="wwwroot\graphics.css">
-      <PackagePath>mono\</PackagePath>
-    </Content>
-    <Content Update="wwwroot\graphics.js">
-      <PackagePath>mono\</PackagePath>
-    </Content>
+    <PackageReference Update="Microsoft.AspNetCore.CookiePolicy" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Update="Microsoft.IO.RecyclableMemoryStream" Version="1.2.2" />
+    <PackageReference Update="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Update="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Update="Microsoft.AspNetCore.SignalR.Client" Version="1.0.2" />
-    <PackageReference Update="Microsoft.Extensions.Logging" Version="2.1.1" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
-    <PackageReference Update="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
-    <PackageReference Update="Newtonsoft.Json" Version="11.0.2" />
+    <Folder Include="Diagrams\" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="wwwroot\Resources\Frogui-Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Lesarde.Frogui.Scope">
+      <HintPath>..\..\..\Lesarde.Frogui.Scope\bin\Release\wasm\Lesarde.Frogui.Scope.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

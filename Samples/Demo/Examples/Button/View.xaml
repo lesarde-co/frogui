@@ -1,0 +1,54 @@
+﻿<Decorator x:Class="Demo.Example_Button.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:root="namespace:Demo"
+		xmlns:local="namespace:Demo.Example_Button"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Decorator.AssetSheet>
+		<Styles>
+			<Style Name="FunButton" TargetType="Button"
+				Background="root:SolidColorBrushes.White.Brush"
+				BorderBrush="root:SolidColorBrushes.Gray.Brush"
+				>
+
+				<VistaManager>
+					<VistaGroup Name="Common">
+						<Vista Name="Hovered"
+						Background="root:SolidColorBrushes.LightBlue.Brush"
+						BorderBrush="root:SolidColorBrushes.Blue.Brush"
+						/>
+						<Vista Name="Pressed"
+						Background="root:SolidColorBrushes.Gray.Brush"
+						BorderBrush="root:SolidColorBrushes.DarkGray.Brush"
+						/>
+					</VistaGroup>
+				</VistaManager>
+
+			</Style>
+
+			<Style Name="FunText" TargetType="TextBlock"
+				Margin="16px"
+				Selectable="false"
+				FontSize="Medium"
+				/>
+		</Styles>
+	</Decorator.AssetSheet>
+
+	<Button Name="e_button" Style="FunButton"/>
+	<!--
+	<Button
+		Name="e_button"
+		Margin="5px"
+		CornerRadius="45px"
+		Padding="8px"
+		Background="Blue"
+		BorderThickness="0px"
+		ImageSource="root:Common.GmailIconBitmap"
+		/>
+-->
+
+</Decorator>
+
+

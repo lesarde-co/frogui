@@ -1,0 +1,27 @@
+﻿<Border x:Class="Demo.BitmapInfoView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:root="namespace:Demo"
+	Background="root:LinearGradientBrushes.RicePaperFade.Brush"
+	BorderBrush="White"
+	BorderThickness="1.5px"
+	BorderPattern="Solid"
+	CornerRadius="4px"
+	>
+	<Border.AssetSheet>
+		<Styles>
+			<Style Name="TextStyle" TargetType="TextBlock"
+					Margin = "4px"
+					Foreground = "White"
+					IsHitTestVisible="false"
+					Selectable="false"
+					>
+			</Style>
+		</Styles>
+	</Border.AssetSheet>
+
+	<Grid>
+		<Image Anchor="0, 0, 1, 3" Source="{Binding Bitmap}" Width="120px" Height="120px" Margin="6px" Stretch="Fill"/>
+		<TextBlock Style="TextStyle" Anchor="1,0" Text="{Binding Name}" FontWeight="Bold" Foreground="SlateGray" FontSize="12pt" />
+		<TextBlock Style="TextStyle" Anchor="1,1" Text="{Binding FileName}" FontStyle="Italic"/>
+	</Grid>
+</Border>

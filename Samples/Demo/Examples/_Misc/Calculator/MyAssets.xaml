@@ -1,0 +1,26 @@
+﻿<AssetSheet x:Class="Demo.Example_Calculator.MyAssets"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="namespace:Demo.Example_Calculator"
+		>
+	<Constants>
+		<FontWeight Name="MyFontWeight">Lighter</FontWeight>
+		<FontFamily Name="MyFontFamily">helvetica</FontFamily>
+		<Brush Name="MyBorderBrush">#06090E</Brush>
+		<Brush Name="MyForeground">White</Brush>
+		<Brush Name="MyErrorForeground">Red</Brush>
+	</Constants>
+
+	<Styles>
+		<Style Name="s_PadButton" TargetType="Button"
+			CornerRadius = "0px"
+			BorderBrush = "MyBorderBrush"
+			Foreground = "MyForeground"
+			FontFamily = "MyFontFamily"
+			FontWeight = "MyFontWeight"
+			FontSize = "5vw"
+			>
+
+		</Style>
+	</Styles>
+
+</AssetSheet>

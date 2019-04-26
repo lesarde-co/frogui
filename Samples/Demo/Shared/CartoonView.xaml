@@ -1,0 +1,28 @@
+﻿<Border x:Class="Demo.CartoonView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Background="#80000000"
+	BorderBrush="DarkGray"
+	BorderThickness="2px"
+	BorderPattern="Dashed"
+	CornerRadius="8px"
+	>
+	<Border.AssetSheet>
+		<Styles>
+			<Style Name="TextStyle" TargetType="TextBlock"
+					Margin = "4px"
+					Foreground = "White"
+					IsHitTestVisible="false"
+					Selectable="false"
+					>
+			</Style>
+		</Styles>
+	</Border.AssetSheet>
+
+	<Grid>
+
+		<Image Anchor="0, 0, 1, 3" Source="{Binding Image}" Width="150px" Height="150px" Margin="6px" Stretch="Fill"/>
+		<TextBlock Style="TextStyle" Anchor="1,0" Text="{Binding Name}" FontWeight="Bold" Foreground="DodgerBlue" FontSize="14pt" />
+		<TextBlock Style="TextStyle" Anchor="1,1" Text="{Binding Producer}"/>
+		<TextBlock Style="TextStyle" Anchor="1,2" Text="{Binding StartYear}"/>
+	</Grid>
+</Border>

@@ -1,0 +1,9 @@
+﻿<Decorator x:Class="Demo.Example_Flex.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Flex Name="e_flex"/>
+
+</Decorator>

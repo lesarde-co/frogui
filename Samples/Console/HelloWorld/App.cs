@@ -1,7 +1,7 @@
 ﻿using Lesarde.Frogui;
 using System.Threading.Tasks;
 
-namespace HelloWorld
+namespace HelloWorldA
 {
 	/***************************************************************************************************
 		App class

@@ -1,0 +1,123 @@
+﻿<SinglePageApplication x:Class="Demo.App"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="namespace:Demo"
+	StartupType="local:MainWindow"
+	>
+
+	<SinglePageApplication.AssetSheet>
+		<Constants>
+			<Brush Name="PropEditAccentBrush">DeepSkyBlue</Brush>
+		</Constants>
+
+		<Styles>
+			<Style Name="s_MenuButton" TargetType="Button"
+				Margin = "3px"
+				BorderThickness = "1px"
+				Background="LinearGradientBrush(ToBottom, #3f92c6 0%, #2574a3 56%, #1d5f88 64%, #1d5f88 100%)"
+				Foreground="White"
+				BorderBrush = "SlateBlue"
+				CornerRadius = "0px, 5px, 5px, 12px"
+				Padding = "3px"
+				Command="local:MainWindow.Commands.RunDemo"
+				>
+
+				<VistaManager>
+					<VistaGroup Name="Common">
+						<Vista Name="Hovered"
+							Background="LinearGradientBrush(ToBottom, #5BADE1 0%, #53A7D8 46%, #3378A3 74%, #3378A3 100%)"
+							BorderBrush="#AD99FE"
+							/>
+						<Vista Name="Pressed"
+							Background="LinearGradientBrush(ToBottom, #3184B8 0%, #1E6B99 46%, #144F64 74%, #144F64 100%)"
+							BorderBrush="#5241BB"
+							/>
+					</VistaGroup>
+				</VistaManager>
+
+			</Style>
+
+			<Style Name="s_form" TargetType="Form" IsDefault="true"
+				Padding="8px"
+				RowGap="2px"
+				LabelGap="3px"
+				/>
+			<!-- H-orizontalAlignment="Left"-->
+
+			<Style Name="s_scrollBar" TargetType="ScrollBar" IsDefault="true"
+				VaryButtonDesign="Triangle"
+				EdgeDesign="Round"
+				VaryButtonLength="17px"
+				VaryButtonFill="Black"
+				VaryButtonBackground="LightGray"
+				ThumbBackground="LightGray"
+				ThumbBorderThickness="1px"
+				ThumbBorderBrush="Transparent"
+
+				TrackBorderBrush="Transparent"
+				TrackBackground="Gray"
+				TrackBorderThickness="1px"	
+				/>
+
+			<!-- NumericEdit Style -->
+			<Style Name="s_numericEdit" TargetType="NumericEdit" IsDefault="true"
+				VaryButtonFill="PropEditAccentBrush"
+				/>
+
+			<!-- Slider Style -->
+			<Style Name="s_slider" TargetType="Slider" IsDefault="true"
+				ThumbBackground="PropEditAccentBrush"
+				/>
+
+			<!--
+			<Style Name="s_defaultSegmentor_itemContainer" TargetType="SelectorItemContainer"
+				Padding="4px"
+				/>
+
+			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true"
+				Background="White"
+				BorderBrush="DarkGray"
+				BorderPattern="Solid"
+				BorderThickness="2px"
+				CornerRadius="10px"
+				ItemContainerStyle="s_defaultSegmentor_itemContainer"
+				/>
+				-->
+
+				<!--
+			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true"
+				Background="White"
+				BorderBrush="DarkGray"
+				BorderPattern="Solid"
+				BorderThickness="2px"
+				CornerRadius="10px"
+				/>
+				-->
+
+			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true" IsVariant="true"
+				Background="DarkGray"
+				BorderBrush="White"
+				BorderPattern="Solid"
+				BorderThickness="2px"
+				CornerRadius="10px"
+				FontSize="Small"
+				/>
+			<!-- H-orizontalAlignment="Left"-->
+
+			<Style Name="s_pixy" TargetType="Pixy" IsDefault="true"
+				Layout="TextRightOfImage"
+				/>
+
+			<!-- Droplist -->
+			<Style Name="s_droplist" TargetType="Droplist" IsDefault="true"
+				Background="Black"
+				BorderThickness="1px"
+				BorderBrush="Gray"
+				ToggleButtonFill="DeepSkyBlue"
+				ToggleButtonDesign="Triangle"
+				ToggleButtonLength="28px"
+				/>
+
+		</Styles>
+	</SinglePageApplication.AssetSheet>
+
+</SinglePageApplication>

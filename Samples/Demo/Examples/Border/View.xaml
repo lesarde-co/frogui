@@ -1,0 +1,9 @@
+﻿<Decorator x:Class="Demo.Example_Border.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		HorizontalAlignment="Center"
+		VerticalAlignment="Center"
+		>
+
+	<Border Name="e_border"/>
+
+</Decorator>

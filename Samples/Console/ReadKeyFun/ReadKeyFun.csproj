@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,15 +9,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.AspNetCore.SignalR.Client" Version="1.0.2" />
-    <PackageReference Update="Microsoft.Extensions.Logging" Version="2.1.1" />
-    <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
-    <PackageReference Update="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
+    <PackageReference Update="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.CookiePolicy" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Cors" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
+    <PackageReference Update="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+    <PackageReference Update="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Update="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Update="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Update="Microsoft.IO.RecyclableMemoryStream" Version="1.2.2" />
+    <PackageReference Update="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Update="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Update="System.Reactive" Version="4.1.5" />
   </ItemGroup>
 
 </Project>
