@@ -1,0 +1,79 @@
+﻿<Border x:Class="Demo.Tip_Calculator.View"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="namespace:Demo.Tip_Calculator"
+		Background="#74BDBF"
+		HorizontalAlignment="Stretch"
+		Padding="40px"
+		>
+
+	<Border.AssetSheet>
+		<Constants>
+			<Length Name="SegmentLength">360px</Length>
+			<FontFamily Name="FontFamily">helvetica</FontFamily>
+			<string Name="PerPerson">per person</string>
+			<FontSize Name="InputFontSize">Large</FontSize>
+			<Brush Name="LabelForeground">White</Brush>
+		</Constants>
+		<Styles>
+			<Style Name="SegmentStyle" TargetType="Border"
+				BackgroundClip="ContentBox"
+				Background="#0175C0"
+				BorderThickness="4px"
+				CornerRadius="20px"
+				Height="SegmentLength"
+				Width="SegmentLength"
+				/>
+			<Style Name="GridStyle" TargetType="Grid"
+				Padding="32px"
+				/>
+			<Style Name="InputStyle" TargetType="TextBox"
+				FontFamily="FontFamily"
+				FontSize="InputFontSize"
+				Foreground="Black"
+				TextAlignment="Right"
+				VerticalAlignment="Center"
+				/>
+			<Style Name="LabelStyle" TargetType="TextBlock"
+				Foreground="LabelForeground"
+				FontFamily="FontFamily"
+				FontSize="Medium"
+				/>
+			<Style Name="PrimaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
+				VerticalAlignment="Bottom"
+				/>
+			<Style Name="SecondaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
+				Foreground="LightBlue"
+				VerticalAlignment="Top"
+				/>
+			<Style Name="TotalOutputStyle" TargetType="TextBlock" BasedOn="LabelStyle"
+				FontSize="XxLarge"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				/>
+		</Styles>
+	</Border.AssetSheet>
+
+	<Flex Name="e_flex" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Wrapping="Wrap">
+		<Border Name="e_input" Style="SegmentStyle">
+			<Grid Name="e_inputGrid" RowCount="6" Style="GridStyle">
+				<TextBlock Style="LabelStyle" Text = "Bill" />
+				<local:MoneyBox Name="e_bill" Anchor="0,1" Style="InputStyle" Money="{Binding Bill, Mode=TwoWay}"/>
+				<TextBlock Anchor="0,2" Style="LabelStyle" Text = "Tip %" />
+				<local:IntegerBox Name="e_tipPercent" Anchor="0,3" Value="{Binding TipPercent, Mode=TwoWay}"/>
+				<TextBlock Anchor="0,4" Style="LabelStyle" Text = "Number of People" />
+				<local:IntegerBox Name="e_numPeople" Anchor="0,5" Value="{Binding NumPeople, Mode=TwoWay}"/>
+			</Grid>
+		</Border>
+		<Border Name="e_output" Style="SegmentStyle">
+			<Grid Name="e_outputGrid" ColumnCount="2" RowCount="5" Style="GridStyle">
+				<TextBlock Style="PrimaryOutputLabelStyle" Text = "Tip" />
+				<TextBlock Name="e_tipPerPersonLabel" Anchor="0,1" Style="SecondaryOutputLabelStyle" Text="PerPerson"/>
+				<TextBlock Anchor="0,3" Style="PrimaryOutputLabelStyle" Text="Total" />
+				<TextBlock Name="e_totalPerPersonLabel" Anchor="0,4" Style="SecondaryOutputLabelStyle" Text="PerPerson"/>
+				<local:MoneyBlock Anchor="1,1,0,2" Style="TotalOutputStyle" Money="{Binding TipPerPerson}"/>
+				<local:MoneyBlock Anchor="1,1,3,2" Style="TotalOutputStyle" Money="{Binding TotalPerPerson}"/>
+			</Grid>
+		</Border>
+	</Flex>
+
+</Border>
