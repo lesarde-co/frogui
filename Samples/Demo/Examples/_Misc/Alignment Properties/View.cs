@@ -23,9 +23,6 @@ namespace Demo.Example_Alignment_Properties
 
 			Common.PrepareDemoGrid(this, horzEnumValues.Length, vertEnumValues.Length, SolidColorBrushes.Blue.Brush, bkgdBrush);
 
-			//var textFrgdBrush = SolidColorBrushes.White.Brush;
-			//var textBkgdBrush = Common.GetSolidColorBrush(Colors.DarkViolet);
-
 			var padding = new Thickness(new Length(5.0, Unit.Px));
 
 			int col = 0, row = 0;
@@ -39,7 +36,6 @@ namespace Demo.Example_Alignment_Properties
 
 					var e_textBlock = new TextBlock()
 					{
-						//Offset = new Thickness(new Length(10, Unit.Px)),
 						Text = $"{horz}, {vert}",
 						Foreground = SolidColorBrushes.White.Brush,
 						Background = SolidColorBrushes.DarkMagenta.Brush,

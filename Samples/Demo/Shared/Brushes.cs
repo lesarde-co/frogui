@@ -20,18 +20,6 @@ namespace Demo
 
 		public abstract IList<BrushInfo> All { get; }
 
-		//static readonly List<BrushInfo> all = new List<BrushInfo>();
-		//readonly List<BrushInfo> all = new List<BrushInfo>();
-
-		//public static DependencyProperty<BrushVariety, Brushes> VarietyProperty { get; } = DependencyProperty<BrushVariety, Brushes>
-		//	.Register();
-
-		//public BrushVariety Variety
-		//{
-		//	get => GetValue(VarietyProperty);
-		//	set => SetValue(VarietyProperty, value);
-		//}
-
 		public abstract BrushVariety Variety { get; }
 
 		/*******************************************************************************

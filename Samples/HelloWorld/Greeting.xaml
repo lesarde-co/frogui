@@ -1,7 +1,0 @@
-﻿<TextBlock x:Class="HelloWorld.Greeting"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		Text = "Hello, World!"
-		FontSize = "Large"
-		HorizontalAlignment = "Center"
-		VerticalAlignment = "Center"
-		/>

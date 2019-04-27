@@ -9,7 +9,6 @@ namespace Demo
 		CheckedEditorPart class
 	***************************************************************************************************/
 
-	//public class CheckedEditorPart<EDITOR> : Grid, IPropertyEditor where EDITOR : Element, IPropertyEditor, new()
 	public class CheckedEditorPart<EDITOR> : Grid where EDITOR : Element, IPropertyEditor, new()
 	{
 		/***********************************************************
@@ -31,11 +30,6 @@ namespace Demo
 			Children.Add(E_editor, new GridAnchor(1, 0));
 
 			E_checkBox.AddPropertyChangedListener(CheckBox.IsCheckedProperty, ValuedChanged_IsChecked);
-
-			//E_slider.OnValueChanged(MagicSlider.ValueProperty, (value) =>
-			//{
-			//});
-
 		}
 
 		/*******************************************************************************
@@ -46,22 +40,5 @@ namespace Demo
 		{
 			E_editor.Visibility = (value) ? Visibility.Visible : Visibility.Collapsed;
 		}
-
-		/*******************************************************************************
-			BindToSourceProperty()
-		*******************************************************************************/
-
-		//void BindToSourceProperty(DependencyObject sourceObject, DependencyProperty sourceProperty)
-		//{
-		//	E_editor.BindToSourceProperty(sourceObject, sourceProperty);
-		//	//SetBinding(Slider.UserValue1Property, new Binding(sourceProperty, sourceObject) { Mode = BindingMode.TwoWay });
-
-		//	sourceObject.OnValueChanged(sourceProperty, Source_ValueChanged);
-		//}
-
-		//internal void Source_ValueChanged(object v)
-		//{
-		//	E_checkBox.IsChecked = null != v;
-		//}
 	}
 }

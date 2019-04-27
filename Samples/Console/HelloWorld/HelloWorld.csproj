@@ -17,7 +17,7 @@
     <PackageReference Update="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Update="Microsoft.AspNetCore.HttpsPolicy" Version="2.2.0" />
     <PackageReference Update="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    <PackageReference Update="Microsoft.AspNetCore.SignalR.Client" Version="1.1" />
+    <PackageReference Update="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
     <PackageReference Update="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
     <PackageReference Update="Microsoft.Extensions.Logging" Version="2.2.0" />
     <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="2.2.0" />

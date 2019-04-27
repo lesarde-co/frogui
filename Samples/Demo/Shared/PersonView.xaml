@@ -29,9 +29,6 @@
 		</Styles>
 	</Grid.AssetSheet>
 
-	<!--
-	<TextBlock Style="LabelStyle" Anchor="0,0" Text="Id"/>
-	-->
 	<TextBlock Style="LabelStyle" Anchor="0,1" Text="Name"/>
 	<TextBlock Style="LabelStyle" Anchor="0,2" Text="Title"/>
 	<TextBlock Style="LabelStyle" Anchor="0,3" Text="Email"/>

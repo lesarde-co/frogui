@@ -16,7 +16,6 @@ namespace Demo
 			LinearGradientBrushes.Singleton.All,
 			RadialGradientBrushes.Singleton.All,
 			Bitmaps.All
-			//Common.RandomItems
 		};
 
 		public ItemsSourceEditor()
@@ -51,7 +50,6 @@ namespace Demo
 				}
 			}
 
-			//throw new System.Exception();
 			newValue = 0m;
 		}
 

@@ -16,10 +16,6 @@ namespace Demo
 	{
 		public object Value { get; set;  }
 
-		//public Segment(string text, string uriString, object value) : base(text, (uriString == null) ? null : new BitmapImage(new System.Uri(uriString, UriKind.Relative)))
-		//{
-		//	this.Value = value;
-		//}
 		public Segment() { }
 	}
 }

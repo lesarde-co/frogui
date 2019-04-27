@@ -14,25 +14,6 @@ namespace Demo
 
 	public class FontFamilyEditor : MagicSlider, IPropertyEditor
 	{
-		//readonly string[] FontFamilies = new string[]
-		//{
-		//"Arial",
-		//"Arial Black",
-		//"Bookman",
-		//"Comic Sans MS",
-		//"Courier",
-		//"Courier New",
-		//"Garamond",
-		//"Georgia",
-		//"Helvetica",
-		//"Impact",
-		//"Palatino",
-		//"Times",
-		//"Times New Roman",
-		//"Trebuchet MS",
-		//"Verdana"
-		//};
-
 		/***********************************************************
 			FamilyName property
 		***********************************************************/

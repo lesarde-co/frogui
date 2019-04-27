@@ -58,7 +58,6 @@ namespace Demo
 		/// <summary>
 		/// Keeps track of the current example.
 		/// </summary>
-		//Example CurrentExample => null == CurrentDemo ? null : CurrentDemo.GetType();
 		Example CurrentExample { get; set; }
 
 		/// <summary>
@@ -76,7 +75,6 @@ namespace Demo
 
 		public static class Commands
 		{
-			//public static RoutedCommand<Type> RunDemo { get; } = new RoutedCommand<Type>();
 			public static RoutedCommand<Example> RunDemo { get; } = new RoutedCommand<Example>();
 		}
 
@@ -96,10 +94,7 @@ namespace Demo
 			PropertyEditorManager.RegisterDefaultEditor(typeof(VaryDesign), typeof(EnumImageEditor<VaryDesign>));
 			PropertyEditorManager.RegisterDefaultEditor(typeof(bool), typeof(BooleanEditor));
 			PropertyEditorManager.RegisterDefaultEditor(typeof(BorderPattern), typeof(BorderPatternEditor));
-
-			//PropertyEditorManager.RegisterDefaultEditor(typeof(Brush), typeof(BrushEditor));
 			PropertyEditorManager.RegisterDefaultEditor(typeof(Brush), typeof(BrushEditor));
-
 			PropertyEditorManager.RegisterDefaultEditor(typeof(BorderBackgroundClip), typeof(EnumTextEditor<BorderBackgroundClip>));
 			PropertyEditorManager.RegisterDefaultEditor(typeof(CheckDesign), typeof(EnumTextEditor<CheckDesign>));
 			PropertyEditorManager.RegisterDefaultEditor(typeof(CheckState), typeof(EnumTextEditor<CheckState>));
@@ -149,24 +144,6 @@ namespace Demo
 			((IPropertyEditor)e_backgroundEditor).BindToSourceProperty(e_designSurface, Box.BackgroundProperty);
 			e_backgroundEditor.Brush = ImageBrushes.CheckeredDark.Brush;
 
-#if x
-			CommandBindings.Add(Commands.RunDemo)
-				// .Throttle(new TimeSpan(1000)) // Slow down happy clicks. NOTE: For Frogui v 0.2.0, avoid concurrent Reactive Extension (Rx) methods for routed commands
-				.Where(e => e.Parameter != CurrentExample)  // Only allow a different demo request through
-				.Subscribe(e =>
-				{
-					// If just a query then indicate the command can execute
-					if (e.IsQuery)
-						e.CanExecute = true;
-					// Execute the command
-					else
-					{
-						ShowExample(e.Parameter);
-						e.Handled = true;
-					}
-				});
-#endif
-
 #if WASM
 			var BuildName = "WebAssembly";
 #else
@@ -177,27 +154,11 @@ namespace Demo
 
 			Title = $"Frogui Demo ({BuildName})";
 
-#if x
-			foreach (var cur in Examples)
-				AddDemo(cur);
-#else
 			e_exampleList.ItemViewMatcher = new SingleModelViewMatcher(typeof(ExampleView));
 			e_exampleList.ItemsSource = Examples;
 			e_exampleList.AddPropertyChangedListener(Selector.SelectedItemProperty, v => ShowExample((Example)v), true);
 			e_exampleList.SelectedIndex = 0;
-#endif
 		}
-
-		/*******************************************************************************
-			ExampleSelectionChanged()
-		*******************************************************************************/
-
-		//void ExampleSelectionChanged(object selectedItem)
-		//{
-		//	var example = (Example)selectedItem;
-
-
-		//}
 
 		/*******************************************************************************
 			CreateStyle()
@@ -265,8 +226,6 @@ namespace Demo
 				CurrentExampleElement.ClipHorizontalOverflow = false;
 				CurrentExampleElement.ClipVerticalOverflow = false;
 
-				//var exampleView = (IExampleView)CurrentExampleElement;
-
 				e_exampleHost.Child = CurrentExampleElement;
 				e_notes.Text = newExample.Notes;
 				e_funFact.Text = newExample.FunFact;
@@ -279,17 +238,7 @@ namespace Demo
 					e_presetArea.Visibility = Visibility.Visible;
 					e_presetSelector.Init(newExample.Presets, CurrentExampleView);
 				}
-
-				//if (newExample.Prop != PROP.None)
-				//{
-				//	e_propertiesEditorScrollViewer.Visibility = Visibility.Visible;
-
-				//	foreach (var segment in PropertyEditorManager.CreateEditorSegments(CurrentExampleView.MainElement, (doType, dp) => doType != typeof(Cascader) || PROP.All == newExample.Prop))
-				//		e_propertiesEditor.Members.Add((Element)segment.Editor, new Placecard(segment.Label));
-				//}
 			}
-
-			//CurrentExample = newExample;
 
 			SyncPropertiesPanel();
 		}

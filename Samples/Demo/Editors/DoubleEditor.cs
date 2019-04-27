@@ -11,7 +11,6 @@ namespace Demo
 			BindToSourceProperty()
 		*******************************************************************************/
 
-		//public override void BindToSourceProperty(DependencyObject sourceObject, DependencyProperty sourceProperty) => SetBinding(NumberProperty, new Binding(sourceProperty, sourceObject) { Mode = BindingMode.TwoWay });
 		void IPropertyEditor.BindToSourceProperty(DependencyObject sourceObject, DependencyProperty sourceProperty) => SetBinding(NumberDoubleProperty, new Binding(sourceProperty, sourceObject) { Mode = BindingMode.TwoWay });
 
 		public DoubleEditor()

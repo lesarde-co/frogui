@@ -22,7 +22,6 @@ namespace Demo
 
 			Focusable = true;
 			Height = Length.InPixels(20);
-			//VaryButtonFill = SolidColorBrushes.Blue.Brush;
 			VaryButtonDesign = VaryDesign.Triangle;
 			VaryButtonLength = Length.InPixels(15);
 			SmallChange = 1;

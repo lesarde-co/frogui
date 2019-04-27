@@ -15,9 +15,6 @@ namespace Demo
 		{
 			public DefaultPreviewView()
 			{
-				//Selectable = false;
-
-				//Width = new Length(200, Unit.Px);
 				Width = new Length(50, Unit.Px);
 
 				// When the data context changes update the Text property
@@ -49,7 +46,6 @@ namespace Demo
 			this.EdgeDesign = TrackEdgeDesign.Square;
 			this.TrackBreadth = Length.InPixels(1);
 			this.TrackBackground = SolidColorBrushes.White.Brush;
-			//this.ThumbBackground = SolidColorBrushes.SlateBlue.Brush;
 			this.ThumbButtonLength = ThumbButtonSize;
 			this.ThumbButtonBreadth = ThumbButtonSize;
 		}

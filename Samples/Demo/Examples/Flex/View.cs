@@ -47,7 +47,6 @@ namespace Demo.Example_Flex
 					FontSize = numberFontSize,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					VerticalAlignment = VerticalAlignment.Center
-					//Selectable = false
 				};
 
 				e_ball.Child = e_number;

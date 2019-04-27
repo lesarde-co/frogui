@@ -29,7 +29,6 @@ namespace Demo
 		{
 			var i = (int)value;
 			newValue = i;
-			//IntChanged(i);
 			return true;
 		}
 

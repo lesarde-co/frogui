@@ -14,20 +14,16 @@ namespace HelloWorldB
 	TextBlock, // Inherit from TextBlock to keep the design simple
 	IViewOfModel<Model> // Indicate that this class is a view of the Model class
     {
-		/// <summary>
-		/// Provides a type-safe property to access the associated model.
-		/// </summary>
 		public object ModelObject
 		{
-			get => (Model)DataContext;
+			get => DataContext;
 			set => DataContext = value;
 		}
 
-		Model IViewOfModel<Model>.Model => throw new System.NotImplementedException();
-
-		object IViewOfModel.ModelObject { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-		//public Model Model => (Model)ModelObject;
+		/// <summary>
+		/// Provides a type-safe property to access the associated model.
+		/// </summary>
+		public Model Model => (Model)ModelObject;
 
 		public Greeting()
 		{

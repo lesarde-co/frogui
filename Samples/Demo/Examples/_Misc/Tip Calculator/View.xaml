@@ -40,7 +40,6 @@
 				Foreground="InputForeground"
 				/>
 
-			<!-- V-erticalAlignment="Center"-->
 			<Style Name="LabelStyle" TargetType="TextBlock"
 				Foreground="LabelForeground"
 				FontFamily="FontFamily"
@@ -49,12 +48,10 @@
 			<Style Name="PrimaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
 				
 				/>
-			<!-- V-erticalAlignment="Bottom"-->
 
 			<Style Name="SecondaryOutputLabelStyle" TargetType="TextBlock" BasedOn="LabelStyle"
 				Foreground="LightBlue"
 				/>
-<!-- 				V-erticalAlignment="Top" -->
 
 			<Style Name="TotalOutputStyle" TargetType="local:MoneyBlock" BasedOn="LabelStyle"
 				FontSize="XxLarge"

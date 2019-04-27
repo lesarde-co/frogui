@@ -14,8 +14,6 @@ namespace Demo
 		{
 			// Create and run the app
 			var app = new App();
-			//app.Alert("Wango Zebra");
-			//app.ScopeLog("In Main()");
 			app.Run();
 		}
 	}

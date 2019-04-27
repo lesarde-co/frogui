@@ -37,17 +37,6 @@
 	</Decorator.AssetSheet>
 
 	<Button Name="e_button" Style="FunButton"/>
-	<!--
-	<Button
-		Name="e_button"
-		Margin="5px"
-		CornerRadius="45px"
-		Padding="8px"
-		Background="Blue"
-		BorderThickness="0px"
-		ImageSource="root:Common.GmailIconBitmap"
-		/>
--->
 
 </Decorator>
 

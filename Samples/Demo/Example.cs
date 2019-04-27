@@ -8,7 +8,6 @@ namespace Demo
 	public enum PROP
 	{
 		All,
-		//ForceAllButCascade,
 		None,
 		NoCascade
 	}

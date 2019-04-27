@@ -1,4 +1,5 @@
-﻿using Lesarde.Frogui;
+﻿#if wait
+using Lesarde.Frogui;
 using Lesarde.Frogui.ComponentModel;
 using Lesarde.Frogui.Controls;
 using Lesarde.Frogui.Controls.Primitives;
@@ -14,7 +15,7 @@ namespace Demo
 	***************************************************************************************************/
 
 	public class BrushPicker : Border, IPropertyEditor
-	{
+    {
 		/***********************************************************
 			VarietySelector class
 		***********************************************************/
@@ -46,8 +47,6 @@ namespace Demo
 			lastRadialGradientBrushInfo,
 			lastImageBrushInfo;
 
-		IModelViewMatcher DroplistItemViewMatcher { get; } = new SingleModelViewMatcher(typeof(BrushInfoView));
-
 		/***********************************************************
 			element properties
 		***********************************************************/
@@ -58,25 +57,7 @@ namespace Demo
 
 		VarietySelector E_varietySelector { get; } = new VarietySelector() { Margin = new Thickness(Length.ZeroPx, Length.ZeroPx, MARGIN, Length.ZeroPx), Width = Length.InPixels(260) };
 
-		Droplist E_droplist_solidColor { get; }
-		Droplist E_droplist_linearGradient { get; }
-		Droplist E_droplist_radialGradient { get; }
-		Droplist E_droplist_image { get; }
-
-		Droplist E_droplist_currrent
-		{
-			get
-			{
-				switch (Variety)
-				{
-					case BrushVariety.Solid: return E_droplist_solidColor;
-					case BrushVariety.LinearGradient: return E_droplist_linearGradient;
-					case BrushVariety.RadialGradient: return E_droplist_radialGradient;
-					case BrushVariety.Image: return E_droplist_image;
-					default: return null;
-				}
-			}
-		}
+		Droplist E_droplist { get; } = new Droplist() { Margin = new Thickness(Length.ZeroPx, MARGIN, MARGIN, Length.ZeroPx), Width = Length.InPixels(260) };
 
 		Border E_preview { get; } = new Border() { BorderBrush = SolidColorBrushes.DarkGray.Brush, BorderThickness = Thickness.InPixels(1), MinWidth = Length.InPixels(120) };
 
@@ -123,11 +104,6 @@ namespace Demo
 
 		public BrushPicker()
 		{
-			E_droplist_solidColor = CreateDroplist(SolidColorBrushes.Singleton.All);
-			E_droplist_linearGradient = CreateDroplist(LinearGradientBrushes.Singleton.All);
-			E_droplist_radialGradient = CreateDroplist(RadialGradientBrushes.Singleton.All);
-			E_droplist_image = CreateDroplist(ImageBrushes.Singleton.All);
-
 			this.BorderThickness = Thickness.InPixels(1);
 			this.BorderBrush = SolidColorBrushes.Gray.Brush;
 
@@ -137,35 +113,16 @@ namespace Demo
 			E_Grid.RowCount = 2;
 
 			E_Grid.Children.Add(E_varietySelector, new GridAnchor(0, 0));
+			E_Grid.Children.Add(E_droplist, new GridAnchor(0, 1));
 			E_Grid.Children.Add(E_preview, new GridAnchor(1, 0, 1, 2));
-
+			
 			E_varietySelector.SelectedItem = E_varietySelector.Items[0];
 			E_varietySelector.AddPropertyChangedListener(Selector.SelectedValueProperty, VarietyChanged);
 
+			E_droplist.ItemViewMatcher = new SingleModelViewMatcher(typeof(BrushInfoView));
+			E_droplist.AddPropertyChangedListener(Droplist.SelectedItemProperty, DroplistSelectedItemChanged);
+
 			E_preview.SetBinding(Border.BackgroundProperty, new Binding(BrushProperty, this));
-		}
-
-		/*******************************************************************************
-			CreateDroplist()
-		*******************************************************************************/
-
-		Droplist CreateDroplist(IList<BrushInfo> brushes)
-		{
-			var droplist = new Droplist()
-			{
-				Margin = new Thickness(Length.ZeroPx, MARGIN, MARGIN, Length.ZeroPx),
-				Width = Length.InPixels(260),
-				ItemsSource = brushes,
-				SelectedIndex = 0,
-				ItemViewMatcher = DroplistItemViewMatcher,
-				Visibility = Visibility.Collapsed
-			};
-
-			droplist.AddPropertyChangedListener(Droplist.SelectedItemProperty, DroplistSelectedItemChanged);
-
-			E_Grid.Children.Add(droplist, new GridAnchor(0, 1));
-
-			return droplist;
 		}
 
 		/*******************************************************************************
@@ -206,14 +163,41 @@ namespace Demo
 
 			var brushVariety = (BrushVariety)value;
 
-			E_droplist_solidColor.Visibility = GetVis(BrushVariety.Solid);
-			E_droplist_linearGradient.Visibility = GetVis(BrushVariety.LinearGradient);
-			E_droplist_radialGradient.Visibility = GetVis(BrushVariety.RadialGradient);
-			E_droplist_image.Visibility = GetVis(BrushVariety.Image);
+			switch (brushVariety)
+			{
+				case BrushVariety.None:
+					Prep(null, null);
+					break;
+				case BrushVariety.Solid:
+					Prep(SolidColorBrushes.Singleton.All, lastSolidBrushInfo);
+					break;
+				case BrushVariety.LinearGradient:
+					Prep(LinearGradientBrushes.Singleton.All, lastLinearGradientBrushInfo);
+					break;
+				case BrushVariety.RadialGradient:
+					Prep(RadialGradientBrushes.Singleton.All, lastRadialGradientBrushInfo);
+					break;
+				case BrushVariety.Image:
+					Prep(ImageBrushes.Singleton.All, lastImageBrushInfo);
+					break;
+			}
 
-			SyncBrushToDropdown();
-
-			Visibility GetVis(BrushVariety variety) => (this.Variety == variety) ? Visibility.Visible : Visibility.Collapsed;
+			void Prep(IList<BrushInfo> brushes, BrushInfo last)
+			{
+				if (null == brushes)
+				{
+					E_droplist.Visibility = Lesarde.Frogui.Visibility.Collapsed;
+					E_droplist.ItemsSource = null;
+					Brush = null;
+				}
+				else
+				{
+					E_droplist.Visibility = Lesarde.Frogui.Visibility.Visible;
+					E_droplist.ItemsSource = brushes;
+					E_droplist.SelectedItem = last ?? brushes[0];
+					SyncBrushToDropdown();
+				}
+			}
 		}
 
 		/*******************************************************************************
@@ -251,31 +235,33 @@ namespace Demo
 				}
 
 				Debug.Assert(-1 != index);
-				E_droplist_solidColor.SelectedItem = SolidColorBrushes.Singleton.All[index];
+				E_droplist.SelectedItem = SolidColorBrushes.Singleton.All[index];
 			}
 
 			// LinearGradientBrush
 			else if (brush is LinearGradientBrush)
-				SyncControls(E_droplist_linearGradient, BrushVariety.LinearGradient, LinearGradientBrushes.Singleton);
+				SyncControls(BrushVariety.LinearGradient, LinearGradientBrushes.Singleton);
 
 			// RadialGradientBrush
 			else if (brush is RadialGradientBrush)
-				SyncControls(E_droplist_radialGradient, BrushVariety.RadialGradient, RadialGradientBrushes.Singleton);
+				SyncControls(BrushVariety.RadialGradient, RadialGradientBrushes.Singleton);
 			// ImageBrush
 			else if (brush is ImageBrush)
-				SyncControls(E_droplist_image, BrushVariety.Image, ImageBrushes.Singleton);
+				SyncControls(BrushVariety.Image, ImageBrushes.Singleton);
 			// error
 			else
 				throw new System.Exception("Unrecognized brush");
 
-			void SyncControls(Droplist droplist, BrushVariety variety, Brushes brushes)
+			void SyncControls(BrushVariety variety, Brushes brushes)
 			{
 				SyncVariety(variety);
-				droplist.SelectedItem = brushes.Find(brush);
+				//me.E_slider.Value = brushes.IndexOf(brush);
+				this.E_droplist.SelectedItem = brushes.Find(brush);
 			}
 
 			void SyncVariety(BrushVariety variety)
 			{
+
 				this.E_varietySelector.SelectBySegmentValue(variety);
 			}
 		}
@@ -286,13 +272,10 @@ namespace Demo
 
 		void SyncBrushToDropdown()
 		{
-			if (BrushVariety.None == Variety)
-				Brush = null;
-			else
-			{
-				var brushInfo = (BrushInfo)E_droplist_currrent.SelectedItem;
-				Brush = brushInfo?.Brush;
-			}
+			//if (null != Brushes)
+			//Brush = Brushes.All[(int)E_slider.Value].Brush;
+			var brushInfo = (BrushInfo)E_droplist.SelectedItem;
+			Brush = brushInfo?.Brush;
 		}
 
 		/*******************************************************************************
@@ -305,3 +288,4 @@ namespace Demo
 		}
 	}
 }
+#endif

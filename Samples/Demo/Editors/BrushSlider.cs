@@ -26,7 +26,6 @@ namespace Demo
 
 			Border e_color { get; } = new Border()
 			{
-				//Margin = new Thickness(new Length(8, Unit.Px), Length.ZeroPx, new Length(8, Unit.Px), Length.ZeroPx),
 				Width = new Length(40, Unit.Px),
 				Height = new Length(20, Unit.Px),
 				BorderBrush = SolidColorBrushes.DarkSlateGray.Brush,
@@ -39,16 +38,13 @@ namespace Demo
 				ColumnCount = 2;
 
 				AddPropertyChangedListener(Element.DataContextProperty, v =>
-					//.Subscribe(v =>
+				{
+					if (v is BrushInfo colorInfo)
 					{
-						if (v is BrushInfo colorInfo)
-						{
-							//var colorInfo = SolidColorBrushes.All[(int)v];
-
-							e_name.Text = colorInfo.Name;
-							e_color.Background = colorInfo.Brush;
-						}
-					});
+						e_name.Text = colorInfo.Name;
+						e_color.Background = colorInfo.Brush;
+					}
+				});
 
 				this.Children.Add(e_color);
 				this.Children.Add(e_name, new GridAnchor(1, 0));

@@ -18,6 +18,7 @@ namespace Demo
 			VerticalAlignment = VerticalAlignment.Center;
 			Padding = Thickness.InPixels(2);
 			Margin = new Thickness(Length.InPixels(4), Length.InPixels(0), Length.InPixels(4), Length.InPixels(0));
+
 			// When the data context changes update the Text property
 			AddPropertyChangedListener(Element.DataContextProperty, v => { Text = v?.ToString(); });
 		}

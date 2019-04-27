@@ -38,11 +38,6 @@ namespace Demo
 				TextShadowHorizontalOffset = Length.InPixels(1);
 				TextShadowVerticalOffset = Length.InPixels(1);
 			}
-			//if (brush is SolidColorBrush solidColorBrush && ((solidColorBrush.Color.R.Intensity + solidColorBrush.Color.G.Intensity + solidColorBrush.Color.B.Intensity) / 3 >= 0x80))
-			//	this.Foreground = SolidColorBrushes.Black.Brush;
-			//else
-			//	this.Foreground = SolidColorBrushes.White.Brush;
-
 		}
 	}
 }

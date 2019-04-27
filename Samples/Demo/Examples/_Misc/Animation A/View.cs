@@ -16,15 +16,6 @@ namespace Demo.Example_Animation_A
 	/// </summary>
 	public partial class View : Paper, IExampleView
     {
-		//IList<Ellipse> Ellipses { get; } = new List<Ellipse>();
-		//int scaleCount;
-
-		//Transform
-		//	TinyScaleTransform = new ScaleTransform() { ScaleX = 0.05, ScaleY = 0.05 },
-		//	SmallScaleTransform = new ScaleTransform() { ScaleX = 0.2, ScaleY = 0.3 },
-		//	NormalScaleTransform = new ScaleTransform() { ScaleX = 1.0, ScaleY = 1.0 },
-		//	BigScaleTransform = new ScaleTransform() { ScaleX = 3.0, ScaleY = 2.0 };
-
 		Random random = new Random();
 
 		Element IExampleView.MainElement => this;
@@ -79,7 +70,6 @@ namespace Demo.Example_Animation_A
 			{
 				if (GetRandomInt(0, 4) != 0)
 				{
-					//cur.Offset = new Lesarde.Frogui.Thickness(new Lesarde.Frogui.Length(e.Position.X, Lesarde.Frogui.Unit.Px), new Lesarde.Frogui.Length(e.Position.Y, Lesarde.Frogui.Unit.Px), zero, zero);
 					cur.TranslateX = Length.InPixels(e.Position.X);
 					cur.TranslateY = Length.InPixels(e.Position.Y);
 					cur.RenderTransform = scaleTransform;

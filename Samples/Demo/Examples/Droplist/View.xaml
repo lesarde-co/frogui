@@ -8,9 +8,3 @@
 	<Droplist Name="e_droplist" />
 
 </Decorator>
-
-
-<!--
-	<Droplist Name="e_droplist" Width="300px" Height="40px" InputMode="Default"/>
-
--->

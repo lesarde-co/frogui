@@ -41,7 +41,6 @@
 				RowGap="2px"
 				LabelGap="3px"
 				/>
-			<!-- H-orizontalAlignment="Left"-->
 
 			<Style Name="s_scrollBar" TargetType="ScrollBar" IsDefault="true"
 				VaryButtonDesign="Triangle"
@@ -68,31 +67,6 @@
 				ThumbBackground="PropEditAccentBrush"
 				/>
 
-			<!--
-			<Style Name="s_defaultSegmentor_itemContainer" TargetType="SelectorItemContainer"
-				Padding="4px"
-				/>
-
-			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true"
-				Background="White"
-				BorderBrush="DarkGray"
-				BorderPattern="Solid"
-				BorderThickness="2px"
-				CornerRadius="10px"
-				ItemContainerStyle="s_defaultSegmentor_itemContainer"
-				/>
-				-->
-
-				<!--
-			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true"
-				Background="White"
-				BorderBrush="DarkGray"
-				BorderPattern="Solid"
-				BorderThickness="2px"
-				CornerRadius="10px"
-				/>
-				-->
-
 			<Style Name="s_defaultSegmentor" TargetType="Segmentor" IsDefault="true" IsVariant="true"
 				Background="DarkGray"
 				BorderBrush="White"
@@ -101,7 +75,6 @@
 				CornerRadius="10px"
 				FontSize="Small"
 				/>
-			<!-- H-orizontalAlignment="Left"-->
 
 			<Style Name="s_pixy" TargetType="Pixy" IsDefault="true"
 				Layout="TextRightOfImage"
