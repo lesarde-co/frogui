@@ -10,7 +10,7 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.0" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.AspNetCore" Version="2.2.0" />

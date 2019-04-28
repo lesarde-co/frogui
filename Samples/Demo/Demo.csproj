@@ -9,7 +9,7 @@
     <CSFile Remove="BrushPicker - wait droplist.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.0" />
+    <PackageReference Include="Lesarde.Frogui.Wasm" Version="0.3.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
   </ItemGroup>
